@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/documentation/">
+    <Project Path="documentation\SocialManager.Documentation\SocialManager.Documentation.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>
