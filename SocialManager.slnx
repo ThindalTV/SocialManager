@@ -1,5 +1,14 @@
 <Solution>
-  <Folder Name="/src/" />
+  <Folder Name="/src/">
+    <Folder Name="Aspire">
+      <Project Path="src\Aspire\Host\SocialManager.Aspire.Host\SocialManager.Aspire.Host.csproj" />
+      <Project Path="src\Aspire\ServiceDefaults\SocialManager.Aspire.ServiceDefaults\SocialManager.Aspire.ServiceDefaults.csproj" />
+    </Folder>
+    <Project Path="src\SocialManager\SocialManager\SocialManager\SocialManager.csproj" />
+    <Project Path="src\SocialManager\SocialManager\SocialManager.Client\SocialManager.Client.csproj" />
+    <Project Path="src\SocialManager.Admin\SocialManager.Admin\SocialManager.Admin.csproj" />
+    <Project Path="src\SocialManager.Admin.API\SocialManager.Admin.API\SocialManager.Admin.API.csproj" />
+  </Folder>
   <Folder Name="/documentation/">
     <Project Path="documentation\SocialManager.Documentation\SocialManager.Documentation.csproj" />
   </Folder>
