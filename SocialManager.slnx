@@ -1,17 +1,17 @@
 <Solution>
-  <Folder Name="/src/">
-    <Folder Name="Aspire">
-      <Project Path="src\Aspire\Host\SocialManager.Aspire.Host\SocialManager.Aspire.Host.csproj" />
-      <Project Path="src\Aspire\ServiceDefaults\SocialManager.Aspire.ServiceDefaults\SocialManager.Aspire.ServiceDefaults.csproj" />
-    </Folder>
-    <Folder Name="Admin">
-      <Project Path="src\Admin\SocialManager.Admin\SocialManager.Admin\SocialManager.Admin.csproj" />
-      <Project Path="src\Admin\SocialManager.Admin.API\SocialManager.Admin.API\SocialManager.Admin.API.csproj" />
-    </Folder>
-    <Project Path="src\SocialManager\SocialManager.csproj" />
-  </Folder>
   <Folder Name="/documentation/">
     <Project Path="documentation\SocialManager.Documentation\SocialManager.Documentation.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/SocialManager/SocialManager.csproj" />
+  </Folder>
+  <Folder Name="/src/Admin/">
+    <Project Path="src/Admin/SocialManager.Admin.API/SocialManager.Admin.API.csproj" />
+    <Project Path="src/Admin/SocialManager.Admin/SocialManager.Admin.csproj" />
+  </Folder>
+  <Folder Name="/src/Aspire/">
+    <Project Path="src/Aspire/SocialManager.Aspire.Host/SocialManager.Aspire.Host.csproj" />
+    <Project Path="src/Aspire/SocialManager.Aspire.ServiceDefaults/SocialManager.Aspire.ServiceDefaults.csproj" />
   </Folder>
   <Folder Name="/tests/" />
 </Solution>
