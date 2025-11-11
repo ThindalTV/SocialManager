@@ -1,8 +1,12 @@
 <Solution>
+  <Folder Name="/.github/">
+    <File Path=".github/copilot-instructions.md" />
+  </Folder>
   <Folder Name="/documentation/">
     <Project Path="documentation\SocialManager.Documentation\SocialManager.Documentation.csproj" />
   </Folder>
   <Folder Name="/src/">
+    <File Path=".github/copilot-instructions.md" />
     <Project Path="src/SocialManager/SocialManager.csproj" />
   </Folder>
   <Folder Name="/src/Admin/">
