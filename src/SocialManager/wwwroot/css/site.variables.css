@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/*@media (prefers-color-scheme: dark) {
+    :root {
+        --main-accent-color: #FF0000;
+        --secondary-accent-color: #FFA07A;
+        --background-color: #000;
+        --container-background-color: #333;
+        --box-shadow: 0 9px 30px 5px rgba(256, 256, 256, 0.2);
+        --header-gradient: linear-gradient(to bottom right, #6B3E9D, #ba9ffb);
+    }
+}*/
+
+/*@media (prefers-color-scheme: light) {*/
+:root {
+    /* Base Colors - Semantic naming */
+    --color-lightest: #FFF;
+    --color-darkest: #000;
+    --color-surface: #f7f7f7;
+    --color-text-primary: #000;
+    --color-text-secondary: #666;
+    --color-border: rgba(153, 153, 153, 1);
+    
+    /* Accent Colors */
+    --color-accent-primary: #B50000;
+    --color-accent-secondary: #D56D57;
+    
+    /* Transparent Overlays */
+    --overlay-light-60: rgba(255, 255, 255, 0.6);
+    --overlay-light-70: rgba(255, 255, 255, 0.7);
+    
+    /* Semantic Usage Colors */
+    --background-color: var(--color-lightest);
+    --container-background-color: var(--color-surface);
+    --text-color: var(--color-text-primary);
+    --text-color-muted: var(--color-text-secondary);
+    --link-color: var(--color-accent-primary);
+    
+    /* Legacy aliases for gradual migration */
+    --main-accent-color: var(--color-accent-primary);
+    --secondary-accent-color: var(--color-accent-secondary);
+    --white: var(--color-lightest);
+    --black: var(--color-darkest);
+    --white-transparent-60: var(--overlay-light-60);
+    --white-transparent-70: var(--overlay-light-70);
+    --gray-light: var(--color-text-secondary);
+    --border-gray: var(--color-border);
+    
+    /* Shadows */
+    --box-shadow: 0 9px 30px 5px rgba(153, 153, 153, 0.2);
+    --box-shadow-light: 0 0 6px 1px rgba(34, 34, 34, 0.1);
+    --border-shadow: 1px solid rgba(0, 0, 0, 0.05);
+    
+    /* Gradients */
+    --header-gradient: linear-gradient(to bottom right, #ec7dde, #82eda8);
+    
+    /* Typography */
+    --font-family-base: 'Noto Sans', sans-serif;
+    --font-family-heading: 'Roboto', sans-serif;
+    --font-weight-heading: 800;
+    --font-weight-bold: bold;
+    --font-size-base: 1rem;
+    --font-size-larger: larger;
+    --font-size-title: 28pt;
+    --font-size-head: 62pt;
+    --font-size-title-mobile: 1.75rem;
+    --line-height-head: 6.5rem;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 3rem;
+    --spacing-xl: 5rem;
+    --spacing-2xl: 8rem;
+    --spacing-3xl: 10rem;
+    --spacing-4xl: 20rem;
+    
+    /* Margins */
+    --side-margin: 10rem;
+    --side-margin-md: 5rem;
+    --side-margin-sm: 4rem;
+    
+    /* Border Radius */
+    --border-radius-sm: 5px;
+    --border-radius-md: 10px;
+    
+    /* Sizes */
+    --image-size-sm: 2rem;
+    --image-size-lg: 8rem;
+    
+    /* Breakpoints */
+    --breakpoint-tablet: 1650px;
+    --breakpoint-mobile: 1399px;
+}
+/*}*/

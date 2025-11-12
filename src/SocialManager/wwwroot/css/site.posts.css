@@ -1,0 +1,95 @@
+/* Post and Blog Content Styles */
+
+article#blogContent {
+    margin-left: var(--side-margin-md);
+    margin-right: var(--side-margin-md);
+}
+
+#contributions > .box + .box, #postList > .box + .box {
+    margin-top: var(--spacing-md) !important;
+}
+
+#contributions .box {
+    margin-left: var(--side-margin-sm);
+    margin-right: var(--side-margin-sm);
+}
+
+/* Thoughts */
+/*.thought {
+    padding-bottom: var(--spacing-sm) !important;
+}*/
+
+.postGrid {
+    margin-top: var(--spacing-2xl);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-sm);
+    margin-left: var(--side-margin-md);
+    margin-right: var(--side-margin-md);
+    position: relative;
+}
+
+    .postGrid > .postBox {
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--box-shadow);
+        padding: var(--spacing-sm) 0rem var(--spacing-lg) 0rem;
+        margin: 0;
+        position: relative;
+    }
+
+        .postGrid > .postBox > img {
+            width: 100%;
+            max-height: 100px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .postGrid > .postBox > .title {
+            text-align: center;
+            border-bottom: 1px solid var(--color-lightest);
+        }
+
+        .postGrid > .postBox > .short {
+            padding-left: var(--spacing-sm);
+            padding-right: var(--spacing-sm);
+        }
+
+        .postGrid > .postBox > .footer {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding-right: var(--spacing-sm);
+            padding-bottom: var(--spacing-sm);
+            text-align: right;
+        }
+
+#postGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: var(--spacing-sm);
+    grid-row-gap: var(--spacing-sm);
+    margin-top: 100px;
+    margin-right: var(--spacing-3xl);
+    margin-left: var(--spacing-3xl);
+}
+
+/* Responsive Posts */
+@media(max-width: 1650px) {
+    .postGrid {
+        margin-top: 50px;
+    }
+}
+
+@media(max-width: 1399px) {
+    .postGrid {
+        display: block;
+    }
+
+    .postBox {
+        margin-left: var(--side-margin-md);
+        margin-right: var(--side-margin-md);
+    }
+
+        .postBox + .postBox {
+            margin-top: var(--spacing-md);
+        }
+}

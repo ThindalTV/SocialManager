@@ -17,4 +17,10 @@
 	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.0" />
   </ItemGroup>
 
+  <!-- Exclude Razor Pages from Blazor CSS isolation -->
+  <ItemGroup>
+    <ScopedCssFiles Remove="**/*.cshtml" />
+    <ScopedCssFiles Remove="**/*.cshtml.css" />
+  </ItemGroup>
+
 </Project>

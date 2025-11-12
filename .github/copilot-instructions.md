@@ -23,6 +23,7 @@ SocialManager is a social media management application built with .NET 9.0, usin
 ### Copilot plans
 - All copilot plans are stored under SocialManager/Plans. Each plan has its own folder with the relevant files(plan, tasks and summary). Leave the files when done.
 - Each plan should be named with a prefix indicating its purpose (e.g., "Feature-", "Bugfix-", "Refactor-") followed by a descriptive title.
+- When asked to create a plan, do not execute it. Just create the relevant files in the correct folder and start a review. Only execute it once explicitly told to.
 
 ### `/tests/` - Unit Tests
 - Location for all test projects

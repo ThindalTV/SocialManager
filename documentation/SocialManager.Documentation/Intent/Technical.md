@@ -1,0 +1,11 @@
+# Technical platform
+- Uses Auth0 for authentication and authorization.
+- Built with ASP.NET Core Minimal API for Admin logic.
+- Blazor for the Admin UI.
+- Aspire for orchestration and service management.
+- Entity Framework Core for data access.
+- CosmosDb for database storage.
+- Hosted on Azure.
+- CI/CD with GitHub Actions.
+- Unit tests with xUnit.
+- Use Pulumi for infrastructure as code.

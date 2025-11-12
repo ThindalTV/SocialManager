@@ -1,0 +1,66 @@
+/* Typography Styles */
+
+/* Base Typography */
+html, body {
+    font-family: var(--font-family-base);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-heading);
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+/* Code */
+pre code {
+    padding: var(--spacing-md) !important;
+    border-radius: var(--spacing-sm);
+}
+
+code {
+    font-family: monospace;
+}
+
+/* Header Text */
+#head {
+    font-size: var(--font-size-head);
+    line-height: var(--line-height-head);
+}
+
+    #head a {
+        color: var(--text-color);
+    }
+
+#title {
+    font-size: var(--font-size-title);
+}
+
+/* Profile Titles */
+#titles {
+    text-align: center;
+}
+
+    #titles li {
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-larger);
+    }
+
+/* Post Titles */
+.postGrid > .postBox > .title {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-larger);
+    text-align: center;
+}
+
+/* Responsive Typography */
+@media(max-width: 1399px) {
+    #titles li {
+        font-size: var(--font-size-title-mobile);
+    }
+}

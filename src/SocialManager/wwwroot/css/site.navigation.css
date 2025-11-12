@@ -1,0 +1,18 @@
+/* Navigation Styles */
+
+div#blogNavigation {
+    margin-left: var(--side-margin-md);
+    margin-right: var(--side-margin-md);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+}
+
+/*#blogNavigation a:first-child {
+    float: left;
+}
+
+#blogNavigation a:last-child {
+    float: right;
+}*/
