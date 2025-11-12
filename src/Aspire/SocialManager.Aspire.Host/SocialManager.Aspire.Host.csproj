@@ -8,10 +8,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UserSecretsId>a98391f7-c41a-4601-bfd7-ae999c449f0b</UserSecretsId>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
 	  <PackageReference Include="Aspire.Hosting.AppHost" Version="13.0.0" />
+	  <PackageReference Include="Aspire.Hosting.Azure.Storage" Version="13.0.0" />
+	  <PackageReference Include="Aspire.Hosting.Azure.CosmosDB" Version="13.0.0" />
   </ItemGroup>
 
   <ItemGroup>

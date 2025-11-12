@@ -2,6 +2,14 @@ using SocialManager.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Azure Storage clients (Azurite emulator)
+builder.AddAzureBlobServiceClient("blobs");
+builder.AddAzureQueueServiceClient("queues");
+builder.AddAzureTableServiceClient("tables");
+
+// Add Azure CosmosDB client
+builder.AddAzureCosmosClient("cosmosdb");
+
 // Add SocialManager Admin Blazor WebAssembly
 builder.Services.AddSocialManagerAdmin();
 
