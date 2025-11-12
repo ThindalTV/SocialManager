@@ -1,10 +1,197 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+	ViewData["Title"] = "Eric Johansson - Developer, Consultant, Educator";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div id="postGrid" b-5mlue2vy44>
+	<div class="box" b-ccjibdgvny>
+		<h3 b-ccjibdgvny>Telerik coding assistant</h3>
+		Copilots and AI Agents are everywhere these days, but Telerik just released one that's actually useful. If you're working with the Blazor bits, make sure to check it out over at <a href="https://x.com/Telerik/status/1928095571090317714">The X previously known as Twitter</a>!
+	</div>
 </div>
+&nbsp;
+<footer>
+	<aside id="contributions">
+		<h2>Open Source</h2>
+		<div class="box">
+			<h3>Blazor Blocks</h3>
+			<p>
+				Blazor Blocks is a WYSIWYG block editor for Blazor.
+			</p>
+			<p>
+				There are quite a few "simple" WYSIWYG editors, but I was missing a way of laying out and creating fully responsive pages,
+				not just blocks of text and images.
+			</p>
+			<p>
+				Blazor Blocks introduces the concept of a block, which is a self contained type of content rendered,
+				which can be placed in columns and rows of your own design. It's a bit like a page builder, but for Blazor.
+				Some examples of blocks are normal WYSIWYG editors, images, titles, code, quotes, video links, embeddable content and more.
+			</p>
+			<p>
+				The entire project is built with 0 dependencies, which means that while it comes with a default set of row and column
+				definitions, it is easy to substitute them for your own.
+			</p>
+			<p>
+				While the project isn't on Nuget quite yet, you can find <a target="_blank" href="https://github.com/thindaltv/blazorblocks">the source code</a> at GitHub.
+				The project is actively taking Pull Requests and contributions.
+			</p>
+		</div>
+		<div class="box">
+			<h3>Deepgram .NET SDK</h3>
+			<p>
+				Deepgram is a speech-to-text service that is easy to use and has a great free tier.
+				What they didn't have was a great .NET API; what they had was basically a direct port of their NodeJS API,
+				which was not very .NET friendly and didn't follow common design patterns in .NET.
+			</p>
+			<p>
+				Me and a few others have, with Deepgrams blessing, worked on creating a new SDK for using Deepgram from .NET.
+			</p>
+			<p>You can find <a target="_blank" href="https://github.com/deepgram/deepgram-dotnet-sdk">the official repository</a> at GitHub.</p>
+		</div>
+		<div class="box">
+			<h3>String.Until / String.SubstringOrShorter</h3>
+			<p>
+				A small and simple package available on Nuget.
+			</p>
+			<p>
+				String.Until is an extension method for the string class which will look for a character or substring and then return everything up to that point.
+				If nothing is found, it returns the full string.
+			</p>
+			<p>
+				String.SubstringOrShorter is an extension method that works like Substring but won't throw an exception if the requested string length is outside of the strings length.
+			</p>
+			<p>Both of these are very simple to implement yourself, but also annoying to keep doing over and over.</p>
+			<p>Find the <a target="_blank" href="https://www.nuget.org/packages/Thindal.Strings">Thindal.Strings</a> package on nuget.org, or look in your packages.</p>
+		</div>
+		<h2>Extensions</h2>
+		<div class="box">
+			<h3>Don't Doxx Yourself</h3>
+			<p>
+				It's easy to mess up when streaming, presenting or showing code.
+				Lower the risk by hiding your configuration values until you actually decide to show them.
+			</p>
+			<p>
+				This extension hides all values in xml and json files.
+				You can click a button to toggle the boxes so you can edit the values,
+				but if you close & reopen the file the values are hidden again.
+			</p>
+			<p>The schema is always visible even when the values are hidden.</p>
+			<img src="/img/contributions/noDoxx.png" alt="Example showing what Don't Doxx Yourself looks like" title="Example showing what Don't Doxx Yourself looks like">
+			<p>
+				<a target="_blank" href="https://marketplace.visualstudio.com/items?itemName=Thindal.NoDoxx">Get NoDoxx at the Visual Studio Marketplace</a>
+				or <a target="_blank" href="https://github.com/thindaltv/nodoxx">contribute to the project</a> on GitHub.
+			</p>
+		</div>
+		<h2>Conference Sessions and Talks</h2>
+		<div class="box">
+			<h3>The road taken; from Framework to .NETx</h3>
+			<p>
+				Do you have a .NET Framework project out there that's really looking to be updated to dotnet?
+				Have a look at the path we chose when upgrading a production web shop running on WebForms with
+				every imaginable anti pattern, into a modern framework with a MVC public site and a Blazor administration interface.
+				On this trip we will go through subjects like analysis, planning, architecture, some best practices and what will you
+				need to do to move it from on premise or Infrastructure As A Service to a fully managed Platform hosted solution.
+			</p>
+			<p>
+				<a target="_blank" href="https://github.com/ThindalTV/RoadTaken_FrameworkToNet_Demo/blob/main/presentation/Slides.pdf">Find the slides</a>
+				and the <a target="_blank" href="https://github.com/ThindalTV/RoadTaken_FrameworkToNet_Demo/tree/main/src">Demo application</a> on GitHub.
+			</p>
+		</div>
+
+		<div class="box">
+			<h3>From Chaos to Order - Using the Repository Pattern the Right Way</h3>
+			<p>
+				If you've ever struggled with your data access being a mess, hard to follow, and even harder to test,
+				perhaps using the tried and true Repository pattern might be the right choice for you!
+			</p>
+			<p>
+				In this beginner-friendly and code heavy session, we will break down the principles behind the repository
+				pattern and how combining it with other patterns like Unit Of Work will make sure that you keep our data consistent, robust and testable.
+			</p>
+			<p>
+				In the end, we will dive into some code examples and have a working, basic implementation of a repository
+				with the necessary plumbing for your next application.
+			</p>
+			<p>
+				<a target="_blank" href="https://github.com/ThindalTV/Sessions-Chaos_To_Order_Repositories/blob/main/presentation/Slides.pdf">Find the slides</a>
+				and the <a target="_blank" href="https://github.com/ThindalTV/Sessions-Chaos_To_Order_Repositories/tree/main/src">Demo application</a> on GitHub.
+			</p>
+		</div>
+		<div class="box">
+			<h3>Turning the Dynamic Static</h3>
+			<p>
+				While it's easy to host dynamic websites with different SPA frameworks and Azure Function calls,
+				a static HTML website will often come out ahead when it comes to loading speed and SEO since they are
+				smaller and do not require any backend calls.
+			</p>
+			<p>
+				By using open-source tools and Blazor with the right render mode, you can build a dynamic website hosted
+				on your development computer or homelab server. Once the site is built, it can be exported to pure HTML,
+				removing the need for dynamic server calls, making the website lightweight and SEO-friendly.
+				This combination of Blazor and static HTML provides the best of both worlds: dynamic content during development and fast,
+				static pages for the end-user.<br>
+				And even keep some dynamic content too!
+			</p>
+			<p>
+				This is how I constructed my personal website supporting daily updates and dynamic content, using minimal dynamic logic.
+			</p>
+		</div>
+		<div class="box">
+			<h3>Angular & Blazor — A Comparative Guide to Key Features and Functionalities</h3>
+			<p>
+				There are a lot of options when it comes to front end frameworks in your .NET stack. Let’s take a closer look at two very popular options, Blazor and Angular. We are going to walk through some demos live for how to do very basic things like routing, event and data binding, and deferred loading. Once the basics are covered we’ll move on to more complicated and exciting horizons, like SSR, Hydration, and Partial Hydration.
+			</p>
+			<p>
+				Alyssa Nicoll is a Senior Developer Advocate at Progress and a Google Developer Expert for Angular who is passionate about bridging gaps in technology, specializing in web development, particularly in Angular, .NET MAUI, and UI/UX Design.
+				<br>
+				Eric Johansson is... Me!
+			</p>
+			<p>
+				Specific Angular & Blazor topics we will cover:
+				<ul>
+					<li>Architecture</li>
+					<li>Routing</li>
+					<li>Control Flow</li>
+					<li>Data & Event Binding</li>
+					<li>Deferred Loading</li>
+					<li>SSR (Server Side Rendering) 🔥</li>
+					<li>Hydration & Prerendering</li>
+				</ul>
+			</p>
+		</div>
+		<h2>Other projects</h2>
+		<div class="box">
+			<h3>Dotnet Bacon</h3>
+			<p>
+				Do you like bacon and/or eggs? If that feels like you, then you might like this project.
+			</p>
+			<p>Learn how to build a .NET tool, how to execute LUA code and how to write a source generator in the tastiest way possible. With bacon!</p>
+			<p>
+				To use the tool yourself, you can install it from the terminal with
+				<code>dotnet tool install -g dotnet-bacon</code>
+			</p>
+			<p>
+				Follow up with running the tool with either <code>dotnet bacon</code> or for some extra tasty,
+				use <code>dotnet bacon egg</code>.
+			</p>
+			<p>
+				If it's not obvious, this is a gag project for testing some technology, but it is published and fully working,
+				and you can find the <a target="_blank" href="https://github.com/ThindalTV/Dotnet.Bacon">source for dotnet bacon</a> on GitHub.
+			</p>
+		</div>
+		<div class="box">
+			<h3>Swetugg</h3>
+			<p>
+				Swetugg is a conference for .NET developers, by .NET developers. Held twice per year, once in Stockholm
+				and once in Gothenburg, it reaches hundreds of developers in the Nordics and beyond.
+			</p>
+			<p>
+				For Swetugg, I am a part of the groups responsible for selecting speakers &amp; scheduling, the website and the afterparty.
+			</p>
+			<p>
+				<a target="_blank" href="https://www.swetugg.se">Read more, book your tickets and take part</a> of two wonderful days in one (or both!) of Swedens largest cities
+				filled to the brim with knowledge, facts, fun and networking. And there's food, entertainment and other silly things too!
+			</p>
+		</div>
+	</aside>
+</footer>

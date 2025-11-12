@@ -1,0 +1,345 @@
+/* Portfolio Layout Styles */
+
+:root {
+    --primary-text: #1a1a1a;
+    --secondary-text: #333;
+    --link-color: #d63384;
+    --border-color: #e0e0e0;
+    --card-background: #ffffff;
+    --body-background: #f5f5f5;
+    --gradient-start: #e4b5f7;
+    --gradient-mid: #b8a4d8;
+    --gradient-end: #a8dfc7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--primary-text);
+    background: var(--body-background);
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    padding: 0;
+    margin: 0;
+}
+
+/* Hero Section with Gradient Background - ONLY HERE */
+.hero-section {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+    padding: 60px 20px 120px;
+}
+
+/* Header/Title Section */
+.portfolio-header {
+    text-align: center;
+    margin-bottom: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+
+.portfolio-header h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--primary-text);
+    letter-spacing: -1px;
+}
+
+.portfolio-roles {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-weight: 600;
+}
+
+.portfolio-roles li {
+    font-size: 1.2rem;
+    color: var(--secondary-text);
+}
+
+.portfolio-roles li:not(:last-child)::after {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--secondary-text);
+    border-radius: 50%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+/* Profile Hero Section */
+.profile-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.profile-bio-card {
+    background: var(--card-background);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-bio-card h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--primary-text);
+}
+
+.profile-bio-card p {
+    margin-bottom: 15px;
+    line-height: 1.8;
+    color: var(--secondary-text);
+}
+
+.profile-image-container {
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.profile-image {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    display: block;
+}
+
+/* Social Links - Inside Bio Card */
+.social-links {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+    margin: 25px 0 0 0;
+    justify-content: flex-start;
+}
+
+.social-links a {
+    display: block;
+    transition: transform 0.2s;
+}
+
+.social-links img {
+    width: 32px;
+    height: 32px;
+}
+
+.social-links a:hover {
+    transform: scale(1.15);
+}
+
+/* Badges - Overlay on Image */
+.badges-overlay {
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.badges-overlay img {
+    height: 100px;
+    width: auto;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s;
+}
+
+.badges-overlay img:hover {
+    transform: translateY(-5px);
+}
+
+/* Content Container - White/Light Background */
+.content-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: var(--body-background);
+}
+
+/* Highlight Box */
+.highlight-box {
+    background-color: var(--card-background);
+    padding: 30px;
+    margin: 0 0 40px 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.highlight-box h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.highlight-box p {
+    margin-bottom: 0;
+    line-height: 1.7;
+}
+
+.highlight-box a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.highlight-box a:hover {
+    text-decoration: underline;
+}
+
+/* Content Sections */
+.content-section {
+    margin: 60px 0;
+}
+
+.content-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: var(--primary-text);
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--primary-text);
+}
+
+/* Project Cards */
+.project-card {
+    background: var(--card-background);
+    margin-bottom: 25px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.project-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-text);
+}
+
+.project-card p {
+    margin-bottom: 15px;
+    line-height: 1.8;
+    color: var(--secondary-text);
+}
+
+.project-card a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.project-card a:hover {
+    text-decoration: underline;
+}
+
+.project-card ul {
+    margin: 15px 0;
+    padding-left: 25px;
+}
+
+.project-card li {
+    margin-bottom: 8px;
+    color: var(--secondary-text);
+}
+
+.project-card code {
+    background: #f5f5f5;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+}
+
+.project-image {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .profile-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-image-container {
+        order: -1;
+    }
+
+    .profile-image {
+        max-width: 100%;
+    }
+
+    .badges-overlay {
+        position: static;
+        justify-content: center;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .portfolio-roles {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .portfolio-roles li:not(:last-child)::after {
+        display: none;
+    }
+
+    .hero-section {
+        padding: 40px 20px 80px;
+    }
+
+    .profile-bio-card {
+        padding: 25px;
+    }
+
+    .content-section h2 {
+        font-size: 1.6rem;
+    }
+
+    .project-card {
+        padding: 20px;
+    }
+}

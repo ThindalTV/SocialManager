@@ -1,52 +1,58 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SocialManager</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SocialManager.styles.css" asp-append-version="true" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"]</title>
+	<script type="importmap"></script>
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="css/tempstyles.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/SocialManager.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">SocialManager</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+	<div id="fullContainer" b-xq76v1hbmf>
+		<header b-xq76v1hbmf><h1 id="head" b-xq76v1hbmf>Eric Johansson</h1></header>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - SocialManager - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+		<header id="showcase">
+			<section class="box presentation">
+				<ul id="titles">
+					<li>Developer</li>
+					<li>Consultant</li>
+					<li>Educator</li>
+				</ul>
+				<img class="profileImage" src="/img/Profile.png" alt="Eric Johansson" title="Eric Johansson">
+				<p>
+					Eric has a broad experience that covers topics from ZX Basic to .NET.
+					With projects spanning from business applications to nuclear power plant systems he developed the ability
+					to adapt and evolve with the rapid changes in the tech landscape.
+				</p><p>
+					That knowledge is something that he shares freely as a content creator and public speaker.
+					Eric is passionate about making complex topics accessible to all level of learners, which you can see in his style of teaching in his livestreams,
+					tutorials and conference sessions.
+				</p><p>
+					Apart from being a techie, he's also a servant to Zelda, an adorable cat.
+				</p>
+				<ul id="socials">
+					<li><a target="_blank" href="https://www.linkedin.com/in/eric-r-johansson/"><img src="/img/logos/LinkedIn.svg" alt="LinkedIn"></a></li>
+					<li><a target="_blank" href="https://www.github.com/thindaltv"><img src="/img/logos/Github-Octocat.svg" alt="Github"></a></li>
+					<li><a target="_blank" href="https://www.twitch.tv/thindal"><img src="/img/logos/Twitch.svg" alt="Twitch"></a></li>
+					<li><a target="_blank" href="https://www.twitter.com/ericjohansson/"><img src="/img/logos/Twitter-X.svg" alt="X/Twitter"></a></li>
+				</ul>
+			</section>
+			<section class="image">
+				<ul id="awards">
+					<li><a target="_blank" href="https://mvp.microsoft.com/en-US/mvp/profile/95be932c-7f7c-47ab-9f3c-53b44c0852aa"><img src="/img/logos/Microsoft_MVP.svg" alt="Microsoft MVP" title="Microsoft MVP"></a></li>
+					<li><a target="_blank" href="https://www.progress.com/champions"><img src="/img/logos/Telerik_Champion.svg" alt="Progress Telerik Champion" title="Progress Telerik Champion"></a></li>
+				</ul>
+			</section>
+		</header>
+
+		@RenderBody()
+	</div>
+
+
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
