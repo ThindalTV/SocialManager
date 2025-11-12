@@ -1,12 +1,12 @@
-using SocialManager.Admin;
+using SocialManager.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorPages();
-
 // Add SocialManager Admin Blazor WebAssembly
 builder.Services.AddSocialManagerAdmin();
+
+// Add services to the container.
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -15,10 +15,25 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
 }
-else
+
+app.UseHttpsRedirection();
+
+// Rewrite /admin/_content to /_content for static assets from packages
+app.Use(async (context, next) =>
 {
-    app.UseWebAssemblyDebugging();
-}
+    var path = context.Request.Path.Value;
+    if (path != null && path.StartsWith("/admin/_content/", StringComparison.OrdinalIgnoreCase))
+    {
+        context.Request.Path = path.Substring(6); // Remove "/admin" prefix
+    }
+    await next();
+});
+
+// Serve Blazor framework files from /admin/_framework
+app.UseBlazorFrameworkFiles("/admin");
+
+// Serve static files (including _content from referenced libraries)
+app.UseStaticFiles();
 
 app.UseRouting();
 
@@ -26,11 +41,16 @@ app.UseAuthorization();
 
 app.UseAntiforgery();
 
-app.MapStaticAssets();
-app.MapRazorPages()
-   .WithStaticAssets();
+// Enable WebAssembly debugging for the /admin path
+if (app.Environment.IsDevelopment())
+{
+    app.UseWebAssemblyDebugging();
+}
 
-// Map the Admin Blazor WebAssembly app at /admin
-app.UseSocialManagerAdmin();
+app.MapRazorPages();
+app.MapStaticAssets();
+
+// Map the admin fallback route
+app.MapFallbackToFile("/admin/{*path:nonfile}", "admin/index.html");
 
 app.Run();

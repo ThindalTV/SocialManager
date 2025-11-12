@@ -17,5 +17,11 @@
     <Project Path="src/Aspire/SocialManager.Aspire.Host/SocialManager.Aspire.Host.csproj" />
     <Project Path="src/Aspire/SocialManager.Aspire.ServiceDefaults/SocialManager.Aspire.ServiceDefaults.csproj" />
   </Folder>
-  <Folder Name="/tests/" />
+  <Folder Name="/tests/">
+    <Project Path="tests/SocialManager.Tests/SocialManager.Tests.csproj" Id="ed0034c6-2740-4ad9-baa8-e86906635b47" />
+  </Folder>
+  <Folder Name="/tests/Admin/">
+    <Project Path="tests/Admin/SocialManager.Admin.API.Tests/SocialManager.Admin.API.Tests.csproj" Id="e5da03fe-ab9c-4241-a144-a8edbb4804d0" />
+    <Project Path="tests/Admin/SocialManager.Admin.Tests/SocialManager.Admin.Tests.csproj" Id="f2a35fd3-7850-4d06-852e-5e6d0facf470" />
+  </Folder>
 </Solution>
