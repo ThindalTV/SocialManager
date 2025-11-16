@@ -1,0 +1,99 @@
+/* Twitch Chat Styling for HTML Formatted Messages */
+
+/* Badge container */
+.twitch-badges {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-right: 4px;
+}
+
+/* Individual badge */
+.twitch-badge {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+}
+
+/* Badge background images - These should be replaced with actual Twitch badge URLs */
+/* Example badge styles - you would need to fetch actual badge images from Twitch API */
+.twitch-badge-moderator {
+    background-image: url('https://static-cdn.jtvnw.net/badges/v1/3267646d-33f0-4b17-b3df-f923a41db1d0/1');
+}
+
+.twitch-badge-subscriber {
+    background-image: url('https://static-cdn.jtvnw.net/badges/v1/5d9f2208-5dd8-11e7-8513-2ff4adfae661/1');
+}
+
+.twitch-badge-vip {
+    background-image: url('https://static-cdn.jtvnw.net/badges/v1/b817aba4-fad8-49e2-b88a-7cc744dfa6ec/1');
+}
+
+.twitch-badge-broadcaster {
+    background-image: url('https://static-cdn.jtvnw.net/badges/v1/5527c58c-fb7d-422d-b71b-f309dcb85cc1/1');
+}
+
+.twitch-badge-partner {
+    background-image: url('https://static-cdn.jtvnw.net/badges/v1/d12a2e27-16f6-41d0-ab77-b780518f00a3/1');
+}
+
+.twitch-badge-turbo {
+    background-image: url('https://static-cdn.jtvnw.net/badges/v1/bd444ec6-8f34-4bf9-91f4-af1e3428d80f/1');
+}
+
+.twitch-badge-premium {
+    background-image: url('https://static-cdn.jtvnw.net/badges/v1/bbbe0db0-a598-423e-86d0-f9fb98ca1933/1');
+}
+
+/* Emote styling */
+.twitch-emote {
+    display: inline-block;
+    vertical-align: middle;
+    height: 28px;
+    width: auto;
+    margin: 0 2px;
+    image-rendering: pixelated;
+}
+
+/* Mention styling */
+.twitch-mention {
+    color: #9147ff; /* Twitch purple */
+    font-weight: 600;
+    background-color: rgba(145, 71, 255, 0.1);
+    padding: 2px 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.twitch-mention:hover {
+    background-color: rgba(145, 71, 255, 0.2);
+}
+
+/* Dark theme adjustments */
+@media (prefers-color-scheme: dark) {
+    .twitch-mention {
+        color: #a970ff;
+        background-color: rgba(169, 112, 255, 0.15);
+    }
+    
+    .twitch-mention:hover {
+        background-color: rgba(169, 112, 255, 0.25);
+    }
+}
+
+/* Light theme adjustments */
+@media (prefers-color-scheme: light) {
+    .twitch-mention {
+        color: #6441a5;
+        background-color: rgba(100, 65, 165, 0.1);
+    }
+    
+    .twitch-mention:hover {
+        background-color: rgba(100, 65, 165, 0.2);
+    }
+}

@@ -19,7 +19,10 @@
     <Project Path="src/SocialManager/SocialManager.API/SocialManager.API.csproj" />
     <Project Path="src/SocialManager/SocialManager/SocialManager.csproj" />
   </Folder>
-  <Folder Name="/src/SocialManager/ChatProviders/" />
+  <Folder Name="/src/SocialManager/ChatProviders/">
+    <Project Path="src/SocialManager/ChatProviders/ChatProvider.Twitch/ChatProvider.Twitch.csproj" Id="951b507a-36d2-4f93-9fbe-c277e5617604" />
+    <Project Path="src/SocialManager/ChatProviders/ChatProvider/ChatProvider.csproj" />
+  </Folder>
   <Folder Name="/src/SocialManager/Data/">
     <Project Path="src/SocialManager/Data/SocialManager.Data.CosmosDb/SocialManager.Data.CosmosDb.csproj" Id="01725655-f66a-4fc6-baf9-86ea77b7b9fa" />
     <Project Path="src/SocialManager/Data/SocialManager.Data/SocialManager.Data.csproj" Id="8d68fdbf-c6f1-4d99-bd6c-cabe6d3e2255" />
