@@ -1,7 +1,9 @@
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+
 var builder = DistributedApplication.CreateBuilder(args);
 
 // Add Azure Storage with Azurite emulator for local development
-var storage = builder.AddAzureStorage("storage")
+var storage = builder.AddAzureStorage("Storage")
     .RunAsEmulator();
 
 // Add individual storage services
@@ -11,13 +13,20 @@ var tables = storage.AddTables("tables");
 
 // Add Azure Cosmos DB with emulator for local development
 var cosmosDb = builder.AddAzureCosmosDB("cosmosdb")
-    .RunAsEmulator()
-    .AddCosmosDatabase("socialmanager");
+    .RunAsEmulator();
 
-builder.AddProject<Projects.SocialManager>("SocialManager")
+var cosmosDatabase = cosmosDb.AddCosmosDatabase("SocialManagerStorage");
+
+var apiProject = builder.AddProject<Projects.SocialManager_API>("SocialManagerApi")
     .WithReference(blobs)
     .WithReference(queues)
     .WithReference(tables)
-    .WithReference(cosmosDb);
+    .WithReference(cosmosDatabase);
+
+builder.AddProject<Projects.SocialManager>("SocialManagerUI")
+    .WithReference(apiProject)
+    .WaitFor(apiProject);
+
+// Blog for devtest
 
 builder.Build().Run();

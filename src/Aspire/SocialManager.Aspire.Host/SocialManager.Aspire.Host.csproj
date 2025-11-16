@@ -15,10 +15,12 @@
 	  <PackageReference Include="Aspire.Hosting.AppHost" Version="13.0.0" />
 	  <PackageReference Include="Aspire.Hosting.Azure.Storage" Version="13.0.0" />
 	  <PackageReference Include="Aspire.Hosting.Azure.CosmosDB" Version="13.0.0" />
+	  <PackageReference Include="AspNetCore.HealthChecks.CosmosDb" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SocialManager\SocialManager.csproj" />
+    <ProjectReference Include="..\..\SocialManager\SocialManager.API\SocialManager.API.csproj" />
+    <ProjectReference Include="..\..\SocialManager\SocialManager\SocialManager.csproj" />
   </ItemGroup>
 
 </Project>

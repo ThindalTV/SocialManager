@@ -7,16 +7,28 @@
   </Folder>
   <Folder Name="/src/">
     <File Path=".github/copilot-instructions.md" />
-    <Project Path="src/SocialManager/SocialManager.csproj" />
-  </Folder>
-  <Folder Name="/src/Admin/">
-    <Project Path="src/Admin/SocialManager.Admin.API/SocialManager.Admin.API.csproj" />
-    <Project Path="src/Admin/SocialManager.Admin/SocialManager.Admin.csproj" />
   </Folder>
   <Folder Name="/src/Aspire/">
     <Project Path="src/Aspire/SocialManager.Aspire.Host/SocialManager.Aspire.Host.csproj" />
     <Project Path="src/Aspire/SocialManager.Aspire.ServiceDefaults/SocialManager.Aspire.ServiceDefaults.csproj" />
   </Folder>
+  <Folder Name="/src/EricJohansson.se/">
+    <Project Path="src/EricJohansson.se/Blog/Blog.csproj" />
+  </Folder>
+  <Folder Name="/src/SocialManager/">
+    <Project Path="src/SocialManager/SocialManager.API/SocialManager.API.csproj" />
+    <Project Path="src/SocialManager/SocialManager/SocialManager.csproj" />
+  </Folder>
+  <Folder Name="/src/SocialManager/ChatProviders/" />
+  <Folder Name="/src/SocialManager/Data/">
+    <Project Path="src/SocialManager/Data/SocialManager.Data.CosmosDb/SocialManager.Data.CosmosDb.csproj" Id="01725655-f66a-4fc6-baf9-86ea77b7b9fa" />
+    <Project Path="src/SocialManager/Data/SocialManager.Data/SocialManager.Data.csproj" Id="8d68fdbf-c6f1-4d99-bd6c-cabe6d3e2255" />
+  </Folder>
+  <Folder Name="/src/SocialManager/SocialProviders/">
+    <Project Path="src/SocialManager/SocialProviders/SocialManager.SocialProvider.X/SocialManager.SocialProvider.X.csproj" Id="b17640c0-fa08-4880-9519-da3de731ab00" />
+    <Project Path="src/SocialManager/SocialProviders/SocialProvider/SocialProvider.csproj" Id="45c19530-8725-4a71-91ab-1cb1af91a1e7" />
+  </Folder>
+  <Folder Name="/src/SocialManager/StreamManagementProviders/" />
   <Folder Name="/tests/">
     <Project Path="tests/SocialManager.Tests/SocialManager.Tests.csproj" Id="ed0034c6-2740-4ad9-baa8-e86906635b47" />
   </Folder>
