@@ -6,12 +6,8 @@ SocialManager is designed as a **multi-user, multi-tenant** platform where each 
 ## Architecture Principles
 
 ### Multi-Tenancy Model
-SocialManager implements a **data isolation** multi-tenancy approach where:
-- Each user's data is logically separated at the data layer
-- Users cannot access or view other users' content or settings
-- All database queries automatically filter by the authenticated user's identity
-- Shared infrastructure with isolated data partitions
-- Resources (blog posts, social posts, media) are tagged with user identifiers
+- Social manager can be multi tenant, but it is always multi user. If installed locally, it will default to single tenant mode, but it can also be run as a public service with multitenant functionality.
+- Each user has separate permissions, using the format area:permissionLevel. For example, blog:read, stream:moderate etc...
 
 ### Authentication Abstraction
 The authentication system is built on an **abstraction layer** that allows the underlying authentication provider to be replaced without affecting the application logic:

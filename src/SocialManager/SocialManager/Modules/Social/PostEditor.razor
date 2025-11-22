@@ -1,0 +1,361 @@
+@page "/blog/editor/{Id}"
+@using SocialManager.Modules.Shared.Components
+@using SocialManager.Shared.DTOs
+@using SocialManager.Services
+@using Telerik.SvgIcons
+@inject IEntryService EntryService
+@inject NavigationManager Navigation
+
+<PageTitle>@(IsNew ? "New Post" : "Edit Post") - SocialManager</PageTitle>
+
+<div class="editor-container">
+    <!-- Page Header -->
+    <div class="editor-header">
+        <div class="header-left">
+            <TelerikButton Icon="@SvgIcon.ArrowLeft"
+                           FillMode="@ThemeConstants.Button.FillMode.Flat"
+                           OnClick="@GoBack"
+                           Title="Back to list" />
+            <h1 class="editor-title">@(IsNew ? "New Post" : "Edit Post")</h1>
+        </div>
+        <div class="header-actions">
+            <TelerikButton Icon="@SvgIcon.Save"
+                           ThemeColor="@ThemeConstants.Button.ThemeColor.Primary"
+                           OnClick="@SaveEntry"
+                           Enabled="@(!IsSaving && CanSave)">
+                @(IsSaving ? "Saving..." : "Save")
+            </TelerikButton>
+            <TelerikButton Icon="@(Model.IsPublished ? SvgIcon.Eye : SvgIcon.EyeSlash)"
+                           ThemeColor="@(Model.IsPublished ? ThemeConstants.Button.ThemeColor.Success : ThemeConstants.Button.ThemeColor.Warning)"
+                           OnClick="@TogglePublish"
+                           Enabled="@(!IsSaving && CanSave)">
+                @(Model.IsPublished ? "Published" : "Draft")
+            </TelerikButton>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-section">
+        <TelerikBreadcrumb Data="@BreadcrumbData" TextField="Text" UrlField="Url" />
+    </div>
+
+    <!-- Content Area - Full Height -->
+    <div class="editor-content-area">
+        <div class="content-inner">
+            <!-- Title Input -->
+            <div class="title-section">
+                <label class="title-label">Title</label>
+                <TelerikTextBox @bind-Value="@Model.Title" 
+                                Placeholder="Enter post title"
+                                Width="100%" />
+            </div>
+
+            <!-- Synopsis Input -->
+            <div class="title-section">
+                <label class="title-label">Synopsis</label>
+                <TelerikTextArea @bind-Value="@Model.Synopsis" 
+                                 Placeholder="Enter a brief summary or excerpt"
+                                 Rows="3"
+                                 Width="100%" />
+            </div>
+
+            <!-- Publishing Options Section -->
+            <div class="publishing-options">
+                <!-- Content Type Toggles -->
+                <div class="content-toggles">
+                    <div class="toggle-item">
+                        <TelerikSwitch @bind-Value="@Model.EnableBlogPost"
+                                       OnLabel="Blog Post Enabled"
+                                       OffLabel="Blog Post Disabled" />
+                    </div>
+                    <div class="toggle-item">
+                        <TelerikSwitch @bind-Value="@Model.EnableSocialPosts"
+                                       OnLabel="Social Posts Enabled"
+                                       OffLabel="Social Posts Disabled" />
+                    </div>
+                </div>
+
+                <!-- Publish Date Picker -->
+                <div class="publish-date-section">
+                    <label class="title-label">Publish Date (Optional)</label>
+                    <TelerikDateTimePicker @bind-Value="@Model.PublishDate"
+                                           Placeholder="Publish immediately"
+                                           Format="yyyy-MM-dd HH:mm"
+                                           Width="300px" />
+                    @if (Model.PublishDate.HasValue)
+                    {
+                        <span class="date-helper">Scheduled for @Model.PublishDate.Value.ToString("f")</span>
+                    }
+                    else
+                    {
+                        <span class="date-helper">Will publish immediately when marked as published</span>
+                    }
+                </div>
+            </div>
+
+            <!-- Validation Message -->
+            @if (!CanSave)
+            {
+                <div class="validation-error">
+                    <TelerikSvgIcon Icon="@SvgIcon.ExclamationCircle" />
+                    <div>
+                        <strong>Cannot save:</strong> You must enable at least one content type (Blog Post or Social Posts) and provide content for it.
+                    </div>
+                </div>
+            }
+
+            <!-- Tags and Categories Row -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg);">
+                <!-- Tags Input -->
+                <div class="title-section">
+                    <label class="title-label">Tags</label>
+                    <MultiSelect Value="@Model.Tags"
+                              ValueChanged="@OnTagsChanged"
+                              AvailableValues="@AvailableTags"
+                              Placeholder="Select or type to add tags"
+                              Width="100%" />
+                </div>
+
+                <!-- Categories Input -->
+                <div class="title-section">
+                    <label class="title-label">Category</label>
+                    <TelerikTextBox @bind-Value="@Model.Category"
+                                    Placeholder="Category"
+                                    Width="100%" />
+                </div>
+            </div>
+
+            <!-- Two Column Layout - Full Height -->
+            <div class="editor-two-column">
+                <!-- Left Column - Blog Editor (60%) -->
+                <div class="blog-editor-column @(Model.EnableBlogPost ? "" : "content-disabled")">
+                    @if (!Model.EnableBlogPost)
+                    {
+                        <div class="disabled-badge-small">
+                            <TelerikSvgIcon Icon="@SvgIcon.X" />
+                            <span>Blog post disabled</span>
+                        </div>
+                    }
+                    <LongFormEditor Content="@Model.BlogContent" 
+                                    ContentChanged="@UpdateBlogContent" />
+                </div>
+
+                <!-- Right Column - Social Media Posts (40%) -->
+                <div class="social-column @(Model.EnableSocialPosts ? "" : "social-column-disabled")">
+                    <!-- Disabled Overlay -->
+                    @if (!Model.EnableSocialPosts)
+                    {
+                        <div class="disabled-overlay">
+                            <div class="disabled-badge">
+                                <TelerikSvgIcon Icon="@SvgIcon.X" Size="@ThemeConstants.SvgIcon.Size.ExtraLarge" />
+                                <h3>Social Posts Disabled</h3>
+                                <p>Enable social posts to create platform-specific content</p>
+                            </div>
+                        </div>
+                    }
+                    
+                    <!-- Content -->
+                    <div class="social-column-content">
+                        <ShortFormEditor SharedText="@Model.SharedSocialText"
+                                         SharedTextChanged="@UpdateSharedText"
+                                         PlatformPosts="@Model.PlatformPosts" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Id { get; set; } = "new";
+
+    private PostEditorResponseDto Model { get; set; } = new();
+    private bool IsNew => Id == "new";
+    private bool IsSaving { get; set; }
+
+    // Available tags and categories for the TagInput components
+    private List<string> AvailableTags { get; set; } = new();
+    private List<string> AvailableCategories { get; set; } = new();
+    
+    private List<BreadcrumbItem> BreadcrumbData { get; set; } = new()
+    {
+        new BreadcrumbItem { Text = "Home", Url = "/" },
+        new BreadcrumbItem { Text = "Blog", Url = "/blog" },
+        new BreadcrumbItem { Text = "Entries", Url = "/blog/entries" },
+        new BreadcrumbItem { Text = "Editor", Url = "#" }
+    };
+
+    /// <summary>
+    /// Determines if the entry can be saved based on validation rules
+    /// </summary>
+    private bool CanSave
+    {
+        get
+        {
+            // Must have at least one content type enabled
+            if (!Model.EnableBlogPost && !Model.EnableSocialPosts)
+                return false;
+
+            // If blog post is enabled, must have blog content
+            if (Model.EnableBlogPost && string.IsNullOrWhiteSpace(Model.BlogContent))
+                return false;
+
+            // If social posts are enabled, must have shared text or at least one platform enabled with content
+            if (Model.EnableSocialPosts)
+            {
+                var hasSharedText = !string.IsNullOrWhiteSpace(Model.SharedSocialText);
+                var hasEnabledPlatform = Model.PlatformPosts?.Any(p => p.IsEnabled) ?? false;
+                
+                if (!hasSharedText && !hasEnabledPlatform)
+                    return false;
+            }
+
+            return true;
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (IsNew)
+        {
+            Model = new PostEditorResponseDto
+            {
+                Title = "New Blog Post",
+                EnableBlogPost = true,
+                EnableSocialPosts = true,
+                PlatformPosts = GetDefaultPlatformPosts()
+            };
+        }
+        else
+        {
+            var entry = await EntryService.GetEntryAsync(Id);
+            if (entry != null)
+            {
+                Model = entry;
+                
+                // Ensure all platforms are present by merging with defaults
+                Model.PlatformPosts = EnsureAllPlatformsPresent(Model.PlatformPosts);
+            }
+            else
+            {
+                // Entry not found, redirect to list
+                Navigation.NavigateTo("/blog/entries");
+            }
+        }
+
+        // Load available tags and categories (these could come from a service in the future)
+        await LoadAvailableTagsAndCategories();
+    }
+
+    /// <summary>
+    /// Ensures all available platforms are present in the list, merging with defaults
+    /// </summary>
+    private static List<PlatformPostDto> EnsureAllPlatformsPresent(List<PlatformPostDto> existingPosts)
+    {
+        var defaultPosts = GetDefaultPlatformPosts();
+        var result = new List<PlatformPostDto>();
+
+        foreach (var defaultPost in defaultPosts)
+        {
+            // Find existing post for this platform or use the default
+            var existingPost = existingPosts.FirstOrDefault(p => p.Platform == defaultPost.Platform);
+            result.Add(existingPost ?? defaultPost);
+        }
+
+        return result;
+    }
+
+    private async Task LoadAvailableTagsAndCategories()
+    {
+        // For now, initialize with commonly used tags and categories
+        // In the future, this should fetch from a service that retrieves existing tags/categories
+        AvailableTags = new List<string>
+        {
+            "Technology", "Tutorial", "News", "Opinion", "Review", "Guide"
+        };
+
+        AvailableCategories = new List<string>
+        {
+            "Development", "Design", "Marketing", "Business", "Productivity"
+        };
+
+        await Task.CompletedTask;
+    }
+
+    private void OnTagsChanged(List<string> tags)
+    {
+        Model.Tags = tags;
+    }
+
+    private void UpdateBlogContent(string content)
+    {
+        Model.BlogContent = content;
+    }
+
+    private void UpdateSharedText(string text)
+    {
+        Model.SharedSocialText = text;
+    }
+
+    private async Task SaveEntry()
+    {
+        if (!CanSave)
+            return;
+
+        IsSaving = true;
+        try
+        {
+            if (IsNew)
+            {
+                var newId = await EntryService.CreateEntryAsync(Model);
+                Navigation.NavigateTo($"/blog/editor/{newId}");
+            }
+            else
+            {
+                await EntryService.UpdateEntryAsync(Model);
+            }
+        }
+        finally
+        {
+            IsSaving = false;
+        }
+    }
+
+    private async Task TogglePublish()
+    {
+        Model.IsPublished = !Model.IsPublished;
+        if (!IsNew)
+        {
+            await SaveEntry();
+        }
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/blog/entries");
+    }
+
+    private static List<PlatformPostDto> GetDefaultPlatformPosts()
+    {
+        return new List<PlatformPostDto>
+        {
+            new() { Platform = "X", IsEnabled = true, CharacterLimit = 280 },
+            new() { Platform = "BlueSky", IsEnabled = true, CharacterLimit = 300 },
+            new() { Platform = "Mastodon", IsEnabled = false, CharacterLimit = 500 },
+            new() { Platform = "LinkedIn", IsEnabled = true, CharacterLimit = 3000 },
+            new() { Platform = "Facebook", IsEnabled = false, CharacterLimit = 63206 },
+            new() { Platform = "Instagram", IsEnabled = false, CharacterLimit = 2200 },
+            new() { Platform = "TikTok", IsEnabled = false, CharacterLimit = 2200 },
+            new() { Platform = "Pinterest", IsEnabled = false, CharacterLimit = 500 },
+            new() { Platform = "Reddit", IsEnabled = false, CharacterLimit = 40000 },
+            new() { Platform = "Thread", IsEnabled = false, CharacterLimit = 500 }
+        };
+    }
+
+    public class BreadcrumbItem
+    {
+        public string Text { get; set; } = string.Empty;
+        public string Url { get; set; } = string.Empty;
+    }
+}

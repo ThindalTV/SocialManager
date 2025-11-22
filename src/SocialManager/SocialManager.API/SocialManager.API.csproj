@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Aspire\SocialManager.Aspire.ServiceDefaults\SocialManager.Aspire.ServiceDefaults.csproj" />
     <ProjectReference Include="..\Data\SocialManager.Data.CosmosDb\SocialManager.Data.CosmosDb.csproj" />
+    <ProjectReference Include="..\SocialManager.Shared\SocialManager.Shared.csproj" />
   </ItemGroup>
 
 </Project>

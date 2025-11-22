@@ -1,0 +1,56 @@
+@using SocialManager.Shared.DTOs
+@using Telerik.SvgIcons
+
+<div class="platformCard @(PlatformPost.IsEnabled ? "" : "disabled")">
+    <div class="cardHeader">
+        <div class="platformInfo">
+            <TelerikSvgIcon Icon="@PlatformIcon" 
+                            Size="@ThemeConstants.SvgIcon.Size.Large"
+                            ThemeColor="@(PlatformPost.IsEnabled ? ThemeConstants.SvgIcon.ThemeColor.Primary : ThemeConstants.SvgIcon.ThemeColor.Base)" />
+            <span class="platformName">@PlatformPost.Platform</span>
+        </div>
+        <TelerikSwitch @bind-Value="@PlatformPost.IsEnabled"
+                       OnLabel="On"
+                       OffLabel="Off" />
+    </div>
+
+    @if (PlatformPost.IsEnabled)
+    {
+        <div class="cardContent">
+            <label class="customTextLabel">Custom Text (Optional)</label>
+            <TelerikTextArea @bind-Value="@PlatformPost.CustomText"
+                             Placeholder="@($"Custom text for {PlatformPost.Platform} (leave empty to use shared text)")"
+                             Rows="3"
+                             Width="100%" />
+            <div class="characterMetadata">
+                <span class="limitLabel">
+                    Limit: @PlatformPost.CharacterLimit chars
+                </span>
+                <span class="countDisplay @(TextLength > PlatformPost.CharacterLimit ? "overLimit" : "")">
+                    @TextLength / @PlatformPost.CharacterLimit
+                </span>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public PlatformPostDto PlatformPost { get; set; } = null!;
+
+    [Parameter, EditorRequired]
+    public string SharedText { get; set; } = string.Empty;
+
+    [Parameter, EditorRequired]
+    public ISvgIcon PlatformIcon { get; set; } = SvgIcon.Share;
+
+    private int TextLength => GetTextLength();
+
+    private int GetTextLength()
+    {
+        var text = string.IsNullOrWhiteSpace(PlatformPost.CustomText) 
+            ? SharedText 
+            : PlatformPost.CustomText;
+        return text.Length;
+    }
+}

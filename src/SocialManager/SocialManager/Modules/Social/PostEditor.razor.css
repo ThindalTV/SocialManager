@@ -1,0 +1,515 @@
+/* ============================================
+   Blog Post Editor - Isolated Styles
+   ============================================
+   Semantic CSS classes for Blog Post Editor page
+   using theme variables for consistency
+   ============================================ */
+
+/* ============================================
+   Main Container
+   ============================================ */
+
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* ============================================
+   Page Header
+   ============================================ */
+
+.editor-header {
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.editor-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+.header-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   Breadcrumb Section
+   ============================================ */
+
+.breadcrumb-section {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--color-background);
+}
+
+/* ============================================
+   Content Area
+   ============================================ */
+
+.editor-content-area {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    background-color: var(--color-background);
+}
+
+.content-inner {
+    padding: var(--spacing-lg);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+/* ============================================
+   Title Input Section
+   ============================================ */
+
+.title-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.title-label {
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-sm);
+    display: block;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-sm);
+}
+
+/* ============================================
+   Publishing Options Section
+   ============================================ */
+
+.publishing-options {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.content-toggles {
+    display: flex;
+    gap: var(--spacing-xl);
+    flex-wrap: wrap;
+}
+
+.toggle-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.publish-date-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.date-helper {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   Validation Error Message
+   ============================================ */
+
+.validation-error {
+    background-color: #fee;
+    border: 1px solid #fcc;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    display: flex;
+    align-items: start;
+    gap: var(--spacing-sm);
+    color: #c00;
+}
+
+.validation-error strong {
+    font-weight: var(--font-weight-bold);
+}
+
+/* ============================================
+   Two Column Layout
+   ============================================ */
+
+.editor-two-column {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    flex: 1;
+    min-height: 0;
+}
+
+@media (min-width: 768px) {
+    .editor-two-column {
+        grid-template-columns: 3fr 2fr;
+    }
+}
+
+/* ============================================
+   Blog Editor Column
+   ============================================ */
+
+.blog-editor-column {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    position: relative;
+}
+
+.blog-editor-column.content-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.disabled-badge-small {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background-color: var(--color-error);
+    color: var(--color-text-inverse);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    z-index: 5;
+    box-shadow: var(--shadow-md);
+}
+
+.blog-editor-card {
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.blog-editor-header {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-text-primary);
+}
+
+.blog-editor-content {
+    flex: 1;
+    min-height: 0;
+}
+
+/* ============================================
+   Social Media Column
+   ============================================ */
+
+.social-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* ============================================
+   Social Column Disabled State
+   ============================================ */
+
+.social-column-disabled {
+    position: relative;
+}
+
+.social-column-disabled .social-column-content {
+    opacity: 0.3;
+    pointer-events: none;
+    user-select: none;
+    filter: blur(2px);
+}
+
+.disabled-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.disabled-badge {
+    background: linear-gradient(135deg, var(--color-error, #ff6358) 0%, var(--color-error-dark, #d64942) 100%);
+    color: var(--color-text-inverse, #ffffff);
+    padding: var(--spacing-xl, 48px) var(--spacing-lg, 24px);
+    border-radius: var(--radius-xl, 16px);
+    text-align: center;
+    box-shadow: var(--shadow-xl, 0 20px 60px rgba(0, 0, 0, 0.3));
+    max-width: 400px;
+    backdrop-filter: blur(10px);
+}
+
+.disabled-badge h3 {
+    margin: var(--spacing-md, 16px) 0 var(--spacing-sm, 8px) 0;
+    font-size: var(--font-size-2xl, 1.75rem);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-text-inverse, #ffffff);
+}
+
+.disabled-badge p {
+    margin: 0;
+    font-size: var(--font-size-base, 1rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: var(--line-height-relaxed, 1.75);
+}
+
+/* ============================================
+   Shared Social Text Card
+   ============================================ */
+
+.shared-text-card {
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+}
+
+.shared-text-header {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-text-primary);
+}
+
+.shared-text-input {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.character-count {
+    display: flex;
+    justify-content: flex-end;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* ============================================
+   Platform Cards Container
+   ============================================ */
+
+.platform-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    padding-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Platform Card
+   ============================================ */
+
+.platform-card {
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    transition: box-shadow var(--transition-base);
+}
+
+.platform-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.platform-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-md);
+}
+
+.platform-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.platform-icon {
+    /* Icon styling handled by Telerik */
+}
+
+.platform-icon.enabled {
+    color: var(--color-primary);
+}
+
+.platform-icon.disabled {
+    color: var(--color-text-secondary);
+}
+
+.platform-name {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    font-size: var(--font-size-base);
+}
+
+.platform-toggle {
+    /* Switch styling handled by Telerik */
+}
+
+/* ============================================
+   Platform Card Content
+   ============================================ */
+
+.platform-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.platform-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.platform-textarea {
+    /* Textarea styling handled by Telerik */
+}
+
+.platform-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-sm);
+}
+
+.character-limit-label {
+    color: var(--color-text-secondary);
+}
+
+.character-count-display {
+    color: var(--color-text-secondary);
+}
+
+.character-count-display.over-limit {
+    color: var(--color-error);
+    font-weight: var(--font-weight-bold);
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
+@media (max-width: 767px) {
+    .editor-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .header-left {
+        width: 100%;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .content-inner {
+        padding: var(--spacing-md);
+    }
+
+    .editor-two-column {
+        grid-template-columns: 1fr;
+    }
+
+    .blog-editor-card {
+        padding: var(--spacing-md);
+    }
+
+    .shared-text-card {
+        padding: var(--spacing-md);
+    }
+
+    .platform-card {
+        padding: var(--spacing-sm);
+    }
+
+    .disabled-badge {
+        padding: var(--spacing-lg, 24px) var(--spacing-md, 16px);
+        max-width: 300px;
+    }
+
+    .disabled-badge h3 {
+        font-size: var(--font-size-xl, 1.5rem);
+    }
+
+    .disabled-badge p {
+        font-size: var(--font-size-sm, 0.875rem);
+    }
+
+    .content-toggles {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+}
+
+@media (max-width: 1023px) {
+    .editor-two-column {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   Loading & Saving States
+   ============================================ */
+
+.editor-saving {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.save-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-success);
+    font-size: var(--font-size-sm);
+}

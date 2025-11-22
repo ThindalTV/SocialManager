@@ -1,0 +1,15 @@
+.pill-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.pill-input-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.pill-input-field {
+    flex: 1;
+}

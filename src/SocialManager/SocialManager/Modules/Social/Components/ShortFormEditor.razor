@@ -1,0 +1,67 @@
+@using SocialManager.Shared.DTOs
+@using Telerik.SvgIcons
+
+<div class="shortFormContainer">
+    <!-- Shared Social Text Card -->
+    <div class="sharedTextCard">
+        <h2 class="sharedTextHeader">
+            <TelerikSvgIcon Icon="@SvgIcon.Share" />
+            Shared Social Media Text
+        </h2>
+        <div class="sharedTextContent">
+            <TelerikTextArea Value="@SharedText"
+                             ValueChanged="@OnSharedTextChanged"
+                             Placeholder="Enter text to share across all enabled platforms"
+                             Rows="4"
+                             Width="100%" />
+            <div class="characterCount">
+                <span>@SharedText.Length characters</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Platform-Specific Cards - Scrollable with bottom padding -->
+    <div class="platformCardsContainer">
+        @foreach (var platform in PlatformPosts)
+        {
+            <SocialPostEditor PlatformPost="@platform"
+                              SharedText="@SharedText"
+                              PlatformIcon="@GetPlatformIcon(platform.Platform)" />
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string SharedText { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback<string> SharedTextChanged { get; set; }
+
+    [Parameter, EditorRequired]
+    public List<PlatformPostDto> PlatformPosts { get; set; } = new();
+
+    private async Task OnSharedTextChanged(string value)
+    {
+        SharedText = value;
+        await SharedTextChanged.InvokeAsync(value);
+    }
+
+    private ISvgIcon GetPlatformIcon(string platform)
+    {
+        return platform switch
+        {
+            "X" => SvgIcon.XLogo,
+            "BlueSky" => SvgIcon.Cloud,
+            "Mastodon" => SvgIcon.Share,
+            "LinkedIn" => SvgIcon.Linkedin,
+            "Facebook" => SvgIcon.Facebook,
+            "Instagram" => SvgIcon.Image,
+            "TikTok" => SvgIcon.MediaManager,
+            "Pinterest" => SvgIcon.Pinterest,
+            "Reddit" => SvgIcon.Reddit,
+            "Thread" => SvgIcon.Link,
+            _ => SvgIcon.Share
+        };
+    }
+}

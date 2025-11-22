@@ -1,0 +1,245 @@
+@inject NavigationManager NavigationManager
+@implements IDisposable
+
+<aside class="sidebar @(IsCollapsed ? "collapsed" : "")">
+    <!-- Logo/Brand Section -->
+    <div class="logo-section">
+        @if (!IsCollapsed)
+        {
+            <TelerikSvgIcon Icon="@SvgIcon.GlobeOutline" 
+                            Size="@ThemeConstants.SvgIcon.Size.Large"
+                            Class="site-logo-icon" />
+            <span class="site-title">SocialManager</span>
+        }
+        else
+        {
+            <TelerikSvgIcon Icon="@SvgIcon.GlobeOutline" 
+                            Size="@ThemeConstants.SvgIcon.Size.Large"
+                            Class="site-logo-icon-collapsed" />
+        }
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        @if (!IsCollapsed)
+        {
+            @foreach (var group in NavigationGroups)
+            {
+                <div class="nav-group">
+                    @if (!string.IsNullOrEmpty(group.Title))
+                    {
+                        <div class="nav-group-title">
+                            @group.Title
+                        </div>
+                    }
+                    <div class="nav-group-items">
+                        @foreach (var item in group.Items)
+                        {
+                            <a href="@item.Url" 
+                               class="nav-item @(IsSelected(item.Url) ? "selected" : "")"
+                               title="@item.Text">
+                                <TelerikSvgIcon Icon="@item.Icon" Size="@ThemeConstants.SvgIcon.Size.Medium" />
+                                <span class="nav-item-text">@item.Text</span>
+                            </a>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <!-- Icon-only mode (no grouping) -->
+            <div class="nav-icons">
+                @foreach (var group in NavigationGroups)
+                {
+                    @foreach (var item in group.Items)
+                    {
+                        <a href="@item.Url" 
+                           class="nav-item-icon @(IsSelected(item.Url) ? "selected" : "")"
+                           title="@item.Text">
+                            <TelerikSvgIcon Icon="@item.Icon" Size="@ThemeConstants.SvgIcon.Size.Large" />
+                        </a>
+                    }
+                }
+            </div>
+        }
+    </nav>
+
+    <!-- User Section -->
+    <div class="user-section-container">
+        @if (!IsCollapsed)
+        {
+            <div class="user-section">
+                <TelerikAvatar ThemeColor="@ThemeConstants.Avatar.ThemeColor.Light"
+                               Type="AvatarType.Icon"
+                               Size="@ThemeConstants.Avatar.Size.Medium"
+                               Class="user-avatar">
+                    <TelerikSvgIcon Icon="@SvgIcon.User" />
+                </TelerikAvatar>
+                <div class="user-info">
+                    <div class="user-name">User Name</div>
+                    <div class="user-email">user@example.com</div>
+                </div>
+                <TelerikButton Icon="@SvgIcon.Gear"
+                               FillMode="@ThemeConstants.Button.FillMode.Flat"
+                               Size="@ThemeConstants.Button.Size.Small"
+                               Class="user-settings-button"
+                               Title="Settings" />
+            </div>
+        }
+        else
+        {
+            <div class="user-section-collapsed" title="User Name">
+                <TelerikAvatar ThemeColor="@ThemeConstants.Avatar.ThemeColor.Light"
+                               Type="AvatarType.Icon"
+                               Size="@ThemeConstants.Avatar.Size.Medium"
+                               Class="user-avatar">
+                    <TelerikSvgIcon Icon="@SvgIcon.User" />
+                </TelerikAvatar>
+            </div>
+        }
+    </div>
+</aside>
+
+@code {
+    [Parameter]
+    public bool IsCollapsed { get; set; }
+
+    [Parameter]
+    public string CurrentPageTitle { get; set; } = "SocialManager";
+
+    [Parameter]
+    public EventCallback<string> CurrentPageTitleChanged { get; set; }
+
+    private List<NavigationGroup> NavigationGroups { get; set; } = new()
+    {
+        new NavigationGroup
+        {
+            Title = "Main",
+            Items = new List<NavigationItem>
+            {
+                new() { Text = "Dashboard", Icon = SvgIcon.Home, Url = "/" },
+                new() { Text = "Analytics (TODO)", Icon = SvgIcon.ChartLineMarkers, Url = "/analytics" }
+            }
+        },
+        new NavigationGroup
+        {
+            Title = "Content",
+            Items = new List<NavigationItem>
+            {
+                new() { Text = "Blog Posts", Icon = SvgIcon.File, Url = "/blog/entries" },
+                new() { Text = "Social Posts (TODO)", Icon = SvgIcon.Image, Url = "/posts" },
+                new() { Text = "Media Library (TODO)", Icon = SvgIcon.Photos, Url = "/media" },
+                new() { Text = "Calendar (TODO)", Icon = SvgIcon.Calendar, Url = "/calendar" }
+            }
+        },
+        new NavigationGroup
+        {
+            Title = "Streaming",
+            Items = new List<NavigationItem>
+            {
+                new() { Text = "Stream Dashboard (TODO)", Icon = SvgIcon.Play, Url = "/stream" },
+                new() { Text = "Overlays (TODO)", Icon = SvgIcon.MediaManager, Url = "/stream/overlay" },
+                new() { Text = "Prompter (TODO)", Icon = SvgIcon.EditTools, Url = "/stream/prompter" },
+                new() { Text = "Chat (TODO)", Icon = SvgIcon.Comment, Url = "/stream/chat" }
+            }
+        },
+        new NavigationGroup
+        {
+            Title = "Settings",
+            Items = new List<NavigationItem>
+            {
+                new() { Text = "Accounts (TODO)", Icon = SvgIcon.User, Url = "/settings/accounts" },
+                new() { Text = "Preferences (TODO)", Icon = SvgIcon.Gear, Url = "/settings/preferences" },
+                new() { Text = "Team (TODO)", Icon = SvgIcon.User, Url = "/settings/team" }
+            }
+        }
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        NavigationManager.LocationChanged += OnLocationChanged;
+        await UpdatePageTitle();
+    }
+
+    private async void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        await UpdatePageTitle();
+        StateHasChanged();
+    }
+
+    private async Task UpdatePageTitle()
+    {
+        var currentPath = new Uri(NavigationManager.Uri).PathAndQuery;
+        string newTitle;
+        
+        // Special handling for blog routes
+        if (currentPath.StartsWith("/blog", StringComparison.OrdinalIgnoreCase))
+        {
+            if (currentPath.Contains("/editor/", StringComparison.OrdinalIgnoreCase))
+            {
+                newTitle = "Blog Editor";
+            }
+            else
+            {
+                newTitle = "Blog Posts";
+            }
+        }
+        else
+        {
+            // Find matching navigation item
+            NavigationItem? matchedItem = null;
+            foreach (var group in NavigationGroups)
+            {
+                matchedItem = group.Items.FirstOrDefault(x => IsSelected(x.Url));
+                if (matchedItem != null)
+                    break;
+            }
+            
+            newTitle = matchedItem?.Text ?? "SocialManager";
+        }
+
+        if (CurrentPageTitle != newTitle)
+        {
+            CurrentPageTitle = newTitle;
+            await CurrentPageTitleChanged.InvokeAsync(newTitle);
+        }
+    }
+
+    private bool IsSelected(string url)
+    {
+        var currentPath = new Uri(NavigationManager.Uri).PathAndQuery;
+        
+        // Exact match
+        if (currentPath == url)
+            return true;
+            
+        // Special case: all /blog/* routes should highlight "Blog Posts"
+        if (url == "/blog/entries" && currentPath.StartsWith("/blog", StringComparison.OrdinalIgnoreCase))
+            return true;
+            
+        // Check if current path starts with the navigation URL (for nested routes)
+        if (url != "/" && currentPath.StartsWith(url, StringComparison.OrdinalIgnoreCase))
+            return true;
+            
+        return false;
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+
+    public class NavigationGroup
+    {
+        public string Title { get; set; } = string.Empty;
+        public List<NavigationItem> Items { get; set; } = new();
+    }
+
+    public class NavigationItem
+    {
+        public string Text { get; set; } = string.Empty;
+        public ISvgIcon Icon { get; set; } = SvgIcon.Home;
+        public string Url { get; set; } = string.Empty;
+    }
+}

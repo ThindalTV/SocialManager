@@ -1,0 +1,60 @@
+/* ============================================
+   Long Form Editor - Isolated Styles
+   ============================================
+   Styles for the blog content editor component
+   ============================================ */
+
+/* Main Container */
+.editorContainer {
+    background-color: var(--color-surface, #ffffff);
+    box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
+    border-radius: var(--radius-lg, 8px);
+    padding: var(--spacing-lg, 24px);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+/* Header */
+.editorHeader {
+    font-size: var(--font-size-lg, 1.125rem);
+    font-weight: var(--font-weight-semibold, 600);
+    margin-bottom: var(--spacing-lg, 24px);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 8px);
+    color: var(--color-text-primary, #212121);
+}
+
+/* Content Area - Contains the Telerik Editor */
+.editorContent {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+}
+
+/* Ensure Telerik Editor fills container */
+.editorContent ::deep .k-editor {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.editorContent ::deep .k-editor-content {
+    flex: 1;
+    min-height: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+    .editorContainer {
+        padding: var(--spacing-md, 16px);
+        border-radius: var(--radius-md, 6px);
+    }
+
+    .editorHeader {
+        font-size: var(--font-size-base, 1rem);
+        margin-bottom: var(--spacing-md, 16px);
+    }
+}

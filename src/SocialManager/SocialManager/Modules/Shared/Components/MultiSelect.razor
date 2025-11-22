@@ -1,0 +1,92 @@
+@* Custom tag/category input component with visual pill/chip interface *@
+<div class="pill-input-container">
+    @if (InternalValue.Any())
+    {
+        <TelerikChipList Data="@ChipData"
+                         OnRemove="@OnChipRemove"
+                         TextField="@nameof(ChipItem.Text)"
+                         RemovableField="@nameof(ChipItem.IsRemovable)"
+                         Class="pill-input-chips">
+        </TelerikChipList>
+    }
+    
+    <TelerikAutoComplete @ref="@AutoCompleteRef"
+                         Data="@FilteredSuggestions"
+                         @bind-Value="@InputText"
+                         OnChange="@OnInputChange"
+                         Placeholder="@Placeholder"
+                         ShowClearButton="true"
+                         Width="@Width"
+                         Class="pill-input-field" />
+</div>
+
+@code {
+    [Parameter]
+    public List<string>? Value { get; set; }
+
+    [Parameter]
+    public EventCallback<List<string>> ValueChanged { get; set; }
+
+    [Parameter]
+    public string Placeholder { get; set; } = "Type to add items";
+
+    [Parameter]
+    public string Width { get; set; } = "100%";
+
+    [Parameter]
+    public List<string> AvailableValues { get; set; } = [];
+
+    private TelerikAutoComplete<string>? AutoCompleteRef { get; set; }
+    private string InputText { get; set; } = string.Empty;
+
+    private List<string> InternalValue
+    {
+        get => Value ?? [];
+        set => Value = value;
+    }
+
+    private List<ChipItem> ChipData => 
+        InternalValue.Select(x => new ChipItem { Text = x, IsRemovable = true }).ToList();
+
+    private List<string> FilteredSuggestions => 
+        AvailableValues.Where(x => !InternalValue.Contains(x)).ToList();
+
+    private async Task OnChipRemove(ChipListRemoveEventArgs args)
+    {
+        if (args.Item is ChipItem chipItem)
+        {
+            InternalValue.Remove(chipItem.Text);
+            await ValueChanged.InvokeAsync(Value);
+        }
+    }
+
+    private async Task OnInputChange(object value)
+    {
+        if (value is string newValue && !string.IsNullOrWhiteSpace(newValue))
+        {
+            // Trim and check if already exists
+            newValue = newValue.Trim();
+            if (!InternalValue.Contains(newValue))
+            {
+                InternalValue.Add(newValue);
+                
+                // Add to available values if not already there
+                if (!AvailableValues.Contains(newValue))
+                {
+                    AvailableValues.Add(newValue);
+                }
+
+                await ValueChanged.InvokeAsync(Value);
+            }
+
+            // Clear the input
+            InputText = string.Empty;
+        }
+    }
+
+    private class ChipItem
+    {
+        public string Text { get; set; } = string.Empty;
+        public bool IsRemovable { get; set; }
+    }
+}

@@ -1,0 +1,210 @@
+@page "/blog/entries"
+@using SocialManager.Services
+@using SocialManager.Shared.DTOs
+@using Telerik.DataSource
+@using Telerik.SvgIcons
+@inject IEntryService EntryService
+@inject NavigationManager Navigation
+
+<PageTitle>Blog Entries - SocialManager</PageTitle>
+
+<div class="k-d-flex k-flex-col k-h-full k-p-lg k-gap-lg">
+    <!-- Page Header -->
+    <div class="k-d-flex k-flex-col k-gap-md">
+        <h1 class="k-h2 k-m-0">Blog Management</h1>
+        <TelerikBreadcrumb Data="@BreadcrumbData" TextField="Text" UrlField="Url" />
+    </div>
+
+    <!-- Grid Container -->
+    <div class="k-flex-1 k-min-h-0">
+        <TelerikGrid TItem="@EntryListItemResponseDto"
+                     Pageable="true"
+                     PageSize="@PageSize"
+                     Sortable="true"
+                     FilterMode="@GridFilterMode.FilterRow"
+                     OnRead="@OnGridRead"
+                     OnRowClick="@OnRowClick"
+                     SelectionMode="@GridSelectionMode.None"
+                     Height="100%"
+                     Class="k-elevation-2">
+            <GridToolBarTemplate>
+                <TelerikButton Icon="@SvgIcon.Plus" 
+                               ThemeColor="@ThemeConstants.Button.ThemeColor.Primary"
+                               OnClick="@CreateNewEntry">
+                    New Entry
+                </TelerikButton>
+            </GridToolBarTemplate>
+            <GridColumns>
+                <GridColumn Field="@nameof(EntryListItemResponseDto.Title)" 
+                            Title="Title" 
+                            Width="300px">
+                    <Template>
+                        @{
+                            var item = (EntryListItemResponseDto)context;
+                            <div class="k-d-flex k-align-items-center k-gap-2">
+                                <TelerikSvgIcon Icon="@SvgIcon.File" Size="@ThemeConstants.SvgIcon.Size.Medium" />
+                                <span class="k-font-weight-bold">@item.Title</span>
+                            </div>
+                        }
+                    </Template>
+                </GridColumn>
+
+                <GridColumn Field="@nameof(EntryListItemResponseDto.CreatedDate)" 
+                            Title="Created" 
+                            DisplayFormat="{0:g}"
+                            Width="180px" />
+
+                <GridColumn Field="@nameof(EntryListItemResponseDto.UpdatedDate)" 
+                            Title="Updated" 
+                            DisplayFormat="{0:g}"
+                            Width="180px" />
+
+                <GridColumn Field="@nameof(EntryListItemResponseDto.IsPublished)" 
+                            Title="Status" 
+                            Filterable="false"
+                            Width="120px">
+                    <Template>
+                        @{
+                            var item = (EntryListItemResponseDto)context;
+                            @if (item.IsPublished)
+                            {
+                                <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Success">Published</TelerikBadge>
+                            }
+                            else
+                            {
+                                <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Warning">Draft</TelerikBadge>
+                            }
+                        }
+                    </Template>
+                </GridColumn>
+
+                <GridColumn Title="Content" 
+                            Filterable="false" 
+                            Sortable="false"
+                            Width="150px">
+                    <Template>
+                        @{
+                            var item = (EntryListItemResponseDto)context;
+                            @if (item.HasBlogPost)
+                            {
+                                <div class="k-d-flex k-align-items-center k-gap-2">
+                                    <TelerikSvgIcon Icon="@SvgIcon.File" Size="@ThemeConstants.SvgIcon.Size.Small" />
+                                    <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Info">
+                                        Blog
+                                    </TelerikBadge>
+                                </div>
+                            }
+                        }
+                    </Template>
+                </GridColumn>
+
+                <GridColumn Title="Social Platforms" 
+                            Filterable="false" 
+                            Sortable="false"
+                            Width="350px">
+                    <Template>
+                        @{
+                            var item = (EntryListItemResponseDto)context;
+                            <div class="k-d-flex k-flex-wrap k-gap-1">
+                                @foreach (var platform in item.SocialPlatforms)
+                                {
+                                    <div class="k-d-flex k-align-items-center k-gap-1">
+                                        <TelerikSvgIcon Icon="@GetPlatformIcon(platform)" Size="@ThemeConstants.SvgIcon.Size.Small" />
+                                        <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Tertiary" 
+                                                      Size="@ThemeConstants.Badge.Size.Small">
+                                            @platform
+                                        </TelerikBadge>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </Template>
+                </GridColumn>
+
+                <GridColumn Width="100px" Filterable="false" Sortable="false">
+                    <Template>
+                        @{
+                            var item = (EntryListItemResponseDto)context;
+                            <TelerikButton Icon="@SvgIcon.Pencil"
+                                           FillMode="@ThemeConstants.Button.FillMode.Flat"
+                                           ThemeColor="@ThemeConstants.Button.ThemeColor.Primary"
+                                           OnClick="@(() => EditEntry(item.Id))"
+                                           Title="Edit">
+                            </TelerikButton>
+                        }
+                    </Template>
+                </GridColumn>
+            </GridColumns>
+        </TelerikGrid>
+    </div>
+</div>
+
+@code {
+    private int PageSize { get; set; } = 20;
+
+    private List<BreadcrumbItem> BreadcrumbData { get; set; } = new()
+    {
+        new BreadcrumbItem { Text = "Home", Url = "/" },
+        new BreadcrumbItem { Text = "Blog", Url = "/blog" },
+        new BreadcrumbItem { Text = "Entries", Url = "/blog/entries" }
+    };
+
+    private async Task OnGridRead(GridReadEventArgs args)
+    {
+        var page = args.Request.Page;
+        var sortField = args.Request.Sorts?.FirstOrDefault()?.Member;
+        var sortDirection = args.Request.Sorts?.FirstOrDefault()?.SortDirection.ToString().ToLower();
+        
+        string? filterText = null;
+        var filterDescriptor = args.Request.Filters?.FirstOrDefault();
+        if (filterDescriptor is FilterDescriptor fd)
+        {
+            filterText = fd.Value?.ToString();
+        }
+
+        var result = await EntryService.GetEntriesAsync(page, PageSize, sortField, sortDirection, filterText);
+        
+        args.Data = result.Items;
+        args.Total = result.TotalCount;
+    }
+
+    private void OnRowClick(GridRowClickEventArgs args)
+    {
+        var item = (EntryListItemResponseDto)args.Item;
+        EditEntry(item.Id);
+    }
+
+    private void CreateNewEntry()
+    {
+        Navigation.NavigateTo("/blog/editor/new");
+    }
+
+    private void EditEntry(string id)
+    {
+        Navigation.NavigateTo($"/blog/editor/{id}");
+    }
+
+    private ISvgIcon GetPlatformIcon(string platform)
+    {
+        return platform switch
+        {
+            "X" => SvgIcon.XLogo,
+            "BlueSky" => SvgIcon.Cloud,
+            "Mastodon" => SvgIcon.Share,
+            "LinkedIn" => SvgIcon.Linkedin,
+            "Facebook" => SvgIcon.Facebook,
+            "Instagram" => SvgIcon.Image,
+            "TikTok" => SvgIcon.MediaManager,
+            "Pinterest" => SvgIcon.Pinterest,
+            "Reddit" => SvgIcon.Reddit,
+            "Thread" => SvgIcon.Link,
+            _ => SvgIcon.Share
+        };
+    }
+
+    public class BreadcrumbItem
+    {
+        public string Text { get; set; } = string.Empty;
+        public string Url { get; set; } = string.Empty;
+    }
+}

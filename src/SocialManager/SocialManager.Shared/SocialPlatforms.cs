@@ -1,4 +1,4 @@
-﻿namespace SocialManager.Data.Types.Social;
+﻿namespace SocialManager.Shared;
 
 public class SocialPlatforms
 {

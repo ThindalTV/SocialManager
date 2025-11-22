@@ -7,6 +7,7 @@
   </Folder>
   <Folder Name="/src/">
     <File Path=".github/copilot-instructions.md" />
+    <Project Path="src/SocialManager/SocialManager.Shared/SocialManager.Shared.csproj" Id="97df0bee-1d69-4822-bafa-8cccadf75275" />
   </Folder>
   <Folder Name="/src/Aspire/">
     <Project Path="src/Aspire/SocialManager.Aspire.Host/SocialManager.Aspire.Host.csproj" />

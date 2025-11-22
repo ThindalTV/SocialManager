@@ -28,7 +28,7 @@ public class SocialManagerDbContext : DbContext
             // Configure owned navigation for BlogPost
             entity.OwnsOne(e => e.BlogPost, blogPost =>
             {
-                blogPost.OwnsMany(bp => bp.Categories);
+                blogPost.OwnsMany(bp => bp.Tags);
             });
 
             // Configure owned collection for SocialPosts
@@ -39,25 +39,5 @@ public class SocialManagerDbContext : DbContext
                 .HasValue<Entry>("Entry")
                 .HasValue<BlogPost>("BlogPost");
         });
-
-        // Configure BlogPost - it inherits from Entry so most config is there
-        modelBuilder.Entity<BlogPost>();
-
-        // Configure Category as a standalone entity
-        modelBuilder.Entity<Category>(entity =>
-        {
-            entity.ToContainer("Categories");
-            entity.HasNoDiscriminator();
-        });
-
-        // Configure Tag as a standalone entity
-        modelBuilder.Entity<Tag>(entity =>
-        {
-            entity.ToContainer("Tags");
-            entity.HasNoDiscriminator();
-        });
-
-        // Configure SocialPost as owned entity (it doesn't inherit from BaseType)
-        // It will be stored as part of Entry documents
     }
 }

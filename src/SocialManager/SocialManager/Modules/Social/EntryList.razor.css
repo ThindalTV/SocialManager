@@ -1,0 +1,128 @@
+/* ============================================
+   Blog Entry List - Isolated Styles
+   ============================================
+   Semantic CSS classes for Blog Entry List page
+   using theme variables for consistency
+   ============================================ */
+
+/* ============================================
+   Main Container
+   ============================================ */
+
+.entry-list-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: var(--spacing-lg);
+    gap: var(--spacing-lg);
+}
+
+/* ============================================
+   Page Header
+   ============================================ */
+
+.entry-list-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.entry-list-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+/* ============================================
+   Grid Container
+   ============================================ */
+
+.entry-grid-container {
+    flex: 1;
+    min-height: 0;
+}
+
+/* Custom grid styles */
+.entry-grid {
+    box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   Grid Cell Styles
+   ============================================ */
+
+.entry-title-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.entry-title-icon {
+    color: var(--color-primary);
+}
+
+.entry-title-text {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+}
+
+/* ============================================
+   Platform Badges
+   ============================================ */
+
+.platform-badges-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+.platform-badge-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.platform-icon {
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Content Indicators
+   ============================================ */
+
+.content-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.content-icon {
+    color: var(--color-info);
+}
+
+/* ============================================
+   Action Buttons
+   ============================================ */
+
+.entry-action-button {
+    /* Telerik button with custom styling */
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
+@media (max-width: 767px) {
+    .entry-list-container {
+        padding: var(--spacing-md);
+    }
+
+    .entry-list-header {
+        gap: var(--spacing-sm);
+    }
+
+    .entry-list-title {
+        font-size: var(--font-size-xl);
+    }
+}

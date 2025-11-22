@@ -1,0 +1,104 @@
+/* ============================================
+   Social Post Editor - Isolated Styles
+   ============================================
+   Styles for individual platform post cards
+   ============================================ */
+
+/* Platform Card */
+.platformCard {
+    background-color: var(--color-surface, #ffffff);
+    box-shadow: var(--shadow-sm, 0 2px 4px rgba(0, 0, 0, 0.08));
+    border-radius: var(--radius-lg, 8px);
+    padding: var(--spacing-md, 16px);
+    transition: box-shadow var(--transition-base, 0.2s ease);
+}
+
+.platformCard:hover {
+    box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+/* Card Header */
+.cardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-md, 16px);
+}
+
+.platformInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 8px);
+}
+
+.platformName {
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-text-primary, #212121);
+    font-size: var(--font-size-base, 1rem);
+}
+
+/* Card Content - When Enabled */
+.cardContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm, 8px);
+}
+
+.customTextLabel {
+    font-size: var(--font-size-sm, 0.875rem);
+    color: var(--color-text-secondary, #757575);
+}
+
+/* Character Count Metadata */
+.characterMetadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-sm, 0.875rem);
+}
+
+.limitLabel {
+    color: var(--color-text-secondary, #757575);
+}
+
+.countDisplay {
+    color: var(--color-text-secondary, #757575);
+    font-weight: var(--font-weight-medium, 500);
+}
+
+.countDisplay.overLimit {
+    color: var(--color-error, #d32f2f);
+    font-weight: var(--font-weight-bold, 700);
+}
+
+/* Disabled State */
+.platformCard.disabled {
+    opacity: 0.7;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+    .platformCard {
+        padding: var(--spacing-sm, 8px);
+        border-radius: var(--radius-md, 6px);
+    }
+
+    .cardHeader {
+        margin-bottom: var(--spacing-sm, 8px);
+    }
+
+    .platformName {
+        font-size: var(--font-size-sm, 0.875rem);
+    }
+
+    .cardContent {
+        gap: var(--spacing-xs, 4px);
+    }
+
+    .characterMetadata {
+        font-size: var(--font-size-xs, 0.75rem);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-xs, 4px);
+    }
+}

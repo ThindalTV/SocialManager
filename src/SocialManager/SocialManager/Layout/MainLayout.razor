@@ -1,16 +1,47 @@
 ﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+<TelerikRootComponent>
+    <div class="k-d-flex k-h-screen k-overflow-hidden">
+        <!-- Left Sidebar Navigation Component -->
+        <NavigationSidebar IsCollapsed="@IsSidebarCollapsed" 
+                          @bind-CurrentPageTitle="@CurrentPageTitle" />
+
+        <!-- Main Content Area -->
+        <div class="k-flex-1 k-d-flex k-flex-col k-overflow-hidden">
+            <!-- Top AppBar -->
+            <div class="app-header k-d-flex k-align-items-center k-bg-app-surface k-px-lg">
+                <div class="k-d-flex k-align-items-center k-gap-md k-flex-1">
+                    <TelerikButton Icon="@SvgIcon.Menu"
+                                   FillMode="@ThemeConstants.Button.FillMode.Flat"
+                                   OnClick="@ToggleSidebar"
+                                   Title="Toggle sidebar" />
+                    <h1 class="k-h4 k-m-0">@CurrentPageTitle</h1>
+                </div>
+                
+                <div class="k-d-flex k-align-items-center k-gap-3">
+                    <TelerikButton Icon="@SvgIcon.Search"
+                                   FillMode="@ThemeConstants.Button.FillMode.Flat"
+                                   Title="Search" />
+                    <TelerikButton Icon="@SvgIcon.Bell"
+                                   FillMode="@ThemeConstants.Button.FillMode.Flat"
+                                   Title="Notifications" />
+                </div>
+            </div>
+
+            <!-- Page Content -->
+            <main class="k-flex-1 k-overflow-y-auto k-bg-app-surface">
+                @Body
+            </main>
         </div>
+    </div>
+</TelerikRootComponent>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+@code {
+    private bool IsSidebarCollapsed { get; set; } = false;
+    private string CurrentPageTitle { get; set; } = "SocialManager";
+
+    private void ToggleSidebar()
+    {
+        IsSidebarCollapsed = !IsSidebarCollapsed;
+    }
+}

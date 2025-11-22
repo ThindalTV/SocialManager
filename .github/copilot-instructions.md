@@ -42,6 +42,13 @@ SocialManager is a social media management application built with .NET 9.0, usin
 - Follow Microsoft's C# coding conventions
 - Never allow warnings.
 
+### Code style
+
+#### CSS style
+- Use camelCase for class names
+- Use semantic class names.
+- Organize styles by component or page.
+
 ### Blazor Components
 - Use component-based architecture
 - Leverage WebAssembly for interactive UI elements

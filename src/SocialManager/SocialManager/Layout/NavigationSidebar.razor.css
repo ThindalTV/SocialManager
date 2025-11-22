@@ -1,0 +1,221 @@
+/* ============================================
+   Navigation Sidebar - Isolated Styles
+   ============================================
+   Semantic CSS classes for NavigationSidebar component
+   using theme variables for consistency
+   ============================================ */
+
+/* Sidebar container */
+.sidebar {
+    background-color: var(--color-sidebar-bg);
+    background-image: url('/images/plexus-pattern.svg');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    z-index: var(--z-index-sticky);
+    width: var(--sidebar-width);
+    transition: width var(--transition-slow);
+}
+
+/* Sidebar collapsed state */
+.sidebar.collapsed {
+    width: var(--sidebar-width-collapsed);
+}
+
+/* ============================================
+   Logo/Brand Section
+   ============================================ */
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: 0 var(--spacing-lg);
+    height: var(--header-height);
+}
+
+/* Site logo icon */
+.site-logo-icon {
+    color: var(--color-text-inverse);
+}
+
+/* Site logo icon when collapsed (centered) */
+.site-logo-icon-collapsed {
+    color: var(--color-text-inverse);
+    margin: 0 auto;
+}
+
+/* Site title/brand name */
+.site-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-inverse);
+    margin: 0;
+    line-height: var(--line-height-tight);
+}
+
+/* ============================================
+   Navigation Menu
+   ============================================ */
+
+.nav-menu {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-md) 0;
+}
+
+/* Navigation Group */
+.nav-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.nav-group-title {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    color: var(--color-nav-text-muted);
+}
+
+.nav-group-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    padding: 0 var(--spacing-sm);
+}
+
+/* Navigation Item (Expanded) */
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: var(--nav-item-gap);
+    padding: var(--nav-item-padding-y) var(--nav-item-padding-x);
+    border-radius: var(--nav-item-border-radius);
+    text-decoration: none;
+    color: var(--color-nav-text);
+    transition: all var(--transition-base);
+    cursor: pointer;
+}
+
+.nav-item:hover:not(.selected) {
+    background-color: var(--color-nav-hover);
+}
+
+.nav-item.selected {
+    background-color: var(--color-nav-selected-bg);
+    color: var(--color-nav-selected-text);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Note: ::deep is Blazor's official CSS isolation syntax for styling child components
+   These are intentional and necessary for styling Telerik SVG icons */
+.nav-item.selected::deep .k-svg-icon {
+    color: var(--color-nav-selected-text) !important;
+}
+
+.nav-item:not(.selected)::deep .k-svg-icon {
+    color: var(--color-nav-text);
+}
+
+/* Navigation item text label */
+.nav-item-text {
+    /* Inherits color from parent .nav-item */
+}
+
+/* Icon-only mode container */
+.nav-icons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    padding: 0 var(--spacing-sm);
+}
+
+/* Navigation Item (Collapsed/Icon-only) */
+.nav-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 48px;
+    border-radius: var(--nav-item-border-radius);
+    text-decoration: none;
+    color: var(--color-nav-text);
+    transition: all var(--transition-base);
+    cursor: pointer;
+}
+
+.nav-item-icon:hover:not(.selected) {
+    background-color: var(--color-nav-hover);
+}
+
+.nav-item-icon.selected {
+    background-color: var(--color-nav-selected-bg);
+    color: var(--color-nav-selected-text);
+}
+
+/* Note: ::deep is Blazor's official CSS isolation syntax for styling child components
+   These are intentional and necessary for styling Telerik SVG icons */
+.nav-item-icon.selected::deep .k-svg-icon {
+    color: var(--color-nav-selected-text) !important;
+}
+
+.nav-item-icon:not(.selected)::deep .k-svg-icon {
+    color: var(--color-nav-text);
+}
+
+/* ============================================
+   User Section
+   ============================================ */
+
+.user-section-container {
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--color-nav-hover);
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    cursor: pointer;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition-base);
+}
+
+.user-section:hover {
+    background-color: var(--color-nav-hover);
+}
+
+/* User avatar */
+.user-avatar {
+    /* Avatar component styles handled by Telerik */
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-name {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-inverse);
+}
+
+.user-email {
+    font-size: var(--font-size-xs);
+    color: var(--color-nav-text-muted);
+}
+
+/* User settings button */
+.user-settings-button {
+    color: var(--color-text-inverse);
+}
+
+.user-section-collapsed {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    padding: var(--spacing-sm) 0;
+}

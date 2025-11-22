@@ -1,0 +1,416 @@
+/* ============================================
+   Telerik UI for Blazor - Theme Overrides
+   ============================================
+   Maps SocialManager theme variables to Telerik CSS variables
+   for consistent styling across all Telerik components.
+   
+   Load this AFTER:
+   - theme-variables.css
+   - Telerik theme CSS files
+   ============================================ */
+
+:root {
+    /* ============================================
+       Telerik Primary Colors
+       ============================================ */
+    --kendo-color-primary: var(--color-primary);
+    --kendo-color-primary-hover: var(--color-primary-hover);
+    --kendo-color-primary-active: var(--color-primary-active);
+    --kendo-color-primary-emphasis: var(--color-primary-emphasis);
+    
+    /* Primary Color Variations */
+    --kendo-color-primary-subtle: var(--color-purple-100);
+    --kendo-color-primary-subtle-hover: var(--color-purple-200);
+    --kendo-color-primary-subtle-active: var(--color-purple-300);
+    
+    --kendo-color-on-primary: var(--color-text-inverse);
+    --kendo-color-primary-contrast: var(--color-text-inverse);
+    
+    /* ============================================
+       Telerik Base Colors
+       ============================================ */
+    --kendo-color-base: var(--color-surface);
+    --kendo-color-base-hover: var(--color-surface-alt);
+    --kendo-color-base-active: var(--color-background);
+    
+    --kendo-color-on-base: var(--color-text-primary);
+    
+    /* ============================================
+       Telerik Surface Colors
+       ============================================ */
+    --kendo-color-surface: var(--color-surface);
+    --kendo-color-surface-alt: var(--color-surface-alt);
+    --kendo-color-app-surface: var(--color-background);
+    
+    --kendo-color-on-app-surface: var(--color-text-primary);
+    
+    /* ============================================
+       Telerik Text Colors
+       ============================================ */
+    --kendo-color-on-surface: var(--color-text-primary);
+    --kendo-color-subtle: var(--color-text-secondary);
+    
+    /* Body text */
+    --kendo-body-text: var(--color-text-primary);
+    --kendo-body-bg: var(--color-surface);
+    
+    /* Heading colors */
+    --kendo-heading-text: var(--color-text-primary);
+    
+    /* Link colors */
+    --kendo-link-text: var(--color-primary);
+    --kendo-link-hover-text: var(--color-primary-hover);
+    
+    /* ============================================
+       Telerik Border Colors
+       ============================================ */
+    --kendo-color-border: var(--color-border-subtle);
+    --kendo-color-border-alt: var(--color-border-muted);
+    
+    --kendo-component-border: var(--color-border-subtle);
+    --kendo-component-border-hover: var(--color-border-muted);
+    
+    /* ============================================
+       Telerik Status Colors
+       ============================================ */
+    
+    /* Success */
+    --kendo-color-success: var(--color-success);
+    --kendo-color-success-hover: #059669;
+    --kendo-color-success-active: #047857;
+    --kendo-color-on-success: var(--color-text-inverse);
+    
+    /* Info */
+    --kendo-color-info: var(--color-info);
+    --kendo-color-info-hover: #2563eb;
+    --kendo-color-info-active: #1d4ed8;
+    --kendo-color-on-info: var(--color-text-inverse);
+    
+    /* Warning */
+    --kendo-color-warning: var(--color-warning);
+    --kendo-color-warning-hover: #d97706;
+    --kendo-color-warning-active: #b45309;
+    --kendo-color-on-warning: var(--color-text-inverse);
+    
+    /* Error */
+    --kendo-color-error: var(--color-error);
+    --kendo-color-error-hover: #dc2626;
+    --kendo-color-error-active: #b91c1c;
+    --kendo-color-on-error: var(--color-text-inverse);
+    
+    /* ============================================
+       Telerik Typography
+       ============================================ */
+    --kendo-font-size: var(--font-size-base);
+    --kendo-font-size-xs: var(--font-size-xs);
+    --kendo-font-size-sm: var(--font-size-sm);
+    --kendo-font-size-md: var(--font-size-base);
+    --kendo-font-size-lg: var(--font-size-lg);
+    --kendo-font-size-xl: var(--font-size-xl);
+    
+    --kendo-font-weight: var(--font-weight-normal);
+    --kendo-font-weight-bold: var(--font-weight-bold);
+    
+    --kendo-line-height: var(--line-height-normal);
+    --kendo-line-height-sm: var(--line-height-tight);
+    --kendo-line-height-lg: var(--line-height-relaxed);
+    
+    /* ============================================
+       Telerik Spacing
+       ============================================ */
+    --kendo-spacing: var(--spacing-md);
+    
+    /* Padding scale */
+    --kendo-padding-x-xs: var(--spacing-xs);
+    --kendo-padding-y-xs: var(--spacing-xs);
+    --kendo-padding-x-sm: var(--spacing-sm);
+    --kendo-padding-y-sm: var(--spacing-sm);
+    --kendo-padding-x-md: var(--spacing-md);
+    --kendo-padding-y-md: var(--spacing-md);
+    --kendo-padding-x-lg: var(--spacing-lg);
+    --kendo-padding-y-lg: var(--spacing-lg);
+    
+    /* ============================================
+       Telerik Border Radius
+       ============================================ */
+    --kendo-border-radius: var(--radius-md);
+    --kendo-border-radius-sm: var(--radius-sm);
+    --kendo-border-radius-md: var(--radius-md);
+    --kendo-border-radius-lg: var(--radius-lg);
+    
+    /* ============================================
+       Telerik Shadows
+       ============================================ */
+    --kendo-elevation-1: var(--shadow-sm);
+    --kendo-elevation-2: var(--shadow-md);
+    --kendo-elevation-3: var(--shadow-lg);
+    --kendo-elevation-4: var(--shadow-xl);
+    --kendo-elevation-5: var(--shadow-2xl);
+    
+    /* ============================================
+       Telerik Transitions
+       ============================================ */
+    --kendo-transition: all var(--transition-base);
+    
+    /* ============================================
+       Telerik Z-Index
+       ============================================ */
+    --kendo-zindex-popup: var(--z-index-dropdown);
+    --kendo-zindex-window: var(--z-index-modal);
+    
+    /* ============================================
+       Component-Specific Overrides
+       ============================================ */
+    
+    /* Buttons */
+    --kendo-button-border-radius: var(--radius-md);
+    --kendo-button-padding-x: var(--button-padding-x-md);
+    --kendo-button-padding-y: var(--button-padding-y-md);
+    --kendo-button-padding-x-sm: var(--button-padding-x-sm);
+    --kendo-button-padding-y-sm: var(--button-padding-y-sm);
+    --kendo-button-padding-x-lg: var(--button-padding-x-lg);
+    --kendo-button-padding-y-lg: var(--button-padding-y-lg);
+    
+    /* Inputs */
+    --kendo-input-border-radius: var(--input-border-radius);
+    --kendo-input-border: 1px solid var(--input-border-color);
+    --kendo-input-focus-border: 1px solid var(--input-focus-border-color);
+    --kendo-input-padding-x: var(--input-padding-x);
+    --kendo-input-padding-y: var(--input-padding-y);
+    
+    /* Cards */
+    --kendo-card-border-radius: var(--card-border-radius);
+    --kendo-card-padding-x: var(--card-padding);
+    --kendo-card-padding-y: var(--card-padding);
+    --kendo-card-shadow: var(--card-shadow);
+    
+    /* Grid */
+    --kendo-grid-header-bg: var(--color-surface-alt);
+    --kendo-grid-alt-bg: var(--color-surface-alt);
+    --kendo-grid-hover-bg: var(--color-purple-50);
+    --kendo-grid-selected-bg: var(--color-purple-100);
+    
+    /* AppBar */
+    --kendo-appbar-bg: var(--color-surface);
+    --kendo-appbar-text: var(--color-text-primary);
+    --kendo-appbar-border: var(--color-border-subtle);
+    
+    /* Drawer */
+    --kendo-drawer-bg: var(--color-surface);
+    --kendo-drawer-text: var(--color-text-primary);
+    --kendo-drawer-border: var(--color-border-subtle);
+    
+    /* Menu */
+    --kendo-menu-bg: var(--color-surface);
+    --kendo-menu-text: var(--color-text-primary);
+    --kendo-menu-hover-bg: var(--color-purple-50);
+    --kendo-menu-selected-bg: var(--color-purple-100);
+    
+    /* Dialog/Modal */
+    --kendo-window-bg: var(--color-surface);
+    --kendo-window-text: var(--color-text-primary);
+    --kendo-window-border: var(--color-border-subtle);
+    --kendo-window-shadow: var(--shadow-xl);
+    
+    /* Editor */
+    --kendo-editor-bg: var(--color-surface);
+    --kendo-editor-text: var(--color-text-primary);
+    --kendo-editor-border: var(--color-border-subtle);
+    --kendo-editor-toolbar-bg: var(--color-surface-alt);
+}
+
+/* ============================================
+   Additional Kendo Component Overrides
+   ============================================ */
+
+/* Utility class overrides */
+.k-color-primary {
+    color: var(--color-primary) !important;
+}
+
+.k-bg-primary {
+    background-color: var(--color-primary) !important;
+}
+
+/* Primary button styles */
+.k-button-solid-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-text-inverse);
+}
+
+.k-button-solid-primary:hover,
+.k-button-solid-primary.k-hover {
+    background-color: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+}
+
+.k-button-solid-primary:active,
+.k-button-solid-primary.k-active {
+    background-color: var(--color-primary-active);
+    border-color: var(--color-primary-active);
+}
+
+/* Link/Flat buttons */
+.k-button-flat-primary {
+    color: var(--color-primary);
+}
+
+.k-button-flat-primary:hover {
+    color: var(--color-primary-hover);
+    background-color: var(--color-purple-50);
+}
+
+/* Selected states */
+.k-selected,
+.k-state-selected {
+    background-color: var(--color-purple-100);
+    color: var(--color-primary-dark);
+}
+
+/* Focus states */
+.k-focus,
+.k-state-focus {
+    box-shadow: 0 0 0 2px var(--color-purple-200);
+}
+
+/* Disabled states */
+.k-disabled,
+.k-state-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Grid alternating rows */
+.k-grid tbody tr.k-alt {
+    background-color: var(--color-surface-alt);
+}
+
+.k-grid tbody tr:hover {
+    background-color: var(--color-purple-50);
+}
+
+.k-grid tbody tr.k-selected {
+    background-color: var(--color-purple-100);
+    color: var(--color-primary-dark);
+}
+
+/* Editor toolbar */
+.k-editor-toolbar {
+    background-color: var(--color-surface-alt);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+/* Dropdown/Popup */
+.k-popup {
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+}
+
+/* Notification */
+.k-notification-success {
+    background-color: var(--color-success-bg);
+    border-color: var(--color-success);
+    color: var(--color-success);
+}
+
+.k-notification-info {
+    background-color: var(--color-info-bg);
+    border-color: var(--color-info);
+    color: var(--color-info);
+}
+
+.k-notification-warning {
+    background-color: var(--color-warning-bg);
+    border-color: var(--color-warning);
+    color: var(--color-warning);
+}
+
+.k-notification-error {
+    background-color: var(--color-error-bg);
+    border-color: var(--color-error);
+    color: var(--color-error);
+}
+
+/* Avatar */
+.k-avatar-solid-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-inverse);
+}
+
+/* Badge */
+.k-badge-solid-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-inverse);
+}
+
+/* Chip */
+.k-chip-solid-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-text-inverse);
+}
+
+/* Progress Bar */
+.k-progressbar-value {
+    background-color: var(--color-primary);
+}
+
+/* Switch */
+.k-switch-on .k-switch-thumb-wrap {
+    background-color: var(--color-primary);
+}
+
+/* Slider */
+.k-slider-selection {
+    background-color: var(--color-primary);
+}
+
+.k-draghandle {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+/* Rating */
+.k-rating-item.k-selected .k-icon {
+    color: var(--color-primary);
+}
+
+/* ============================================
+   Dark Mode Overrides (Future Enhancement)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Uncomment and customize when implementing dark mode */
+        /*
+        --kendo-body-bg: #1f2937;
+        --kendo-body-text: #f9fafb;
+        --kendo-color-surface: #1f2937;
+        --kendo-color-app-surface: #111827;
+        */
+    }
+}
+
+/* ============================================
+   Component Priority Overrides
+   ============================================
+   Use !important only when necessary to override
+   deeply nested Telerik styles
+   ============================================ */
+
+/* Ensure primary color is consistent across all states */
+.k-primary,
+.k-button-solid-primary,
+.k-selected.k-primary {
+    background-color: var(--color-primary) !important;
+}
+
+/* Focus ring consistency */
+.k-focus,
+.k-input:focus,
+.k-textarea:focus,
+.k-textbox:focus {
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 0 0 2px var(--color-purple-200) !important;
+}
