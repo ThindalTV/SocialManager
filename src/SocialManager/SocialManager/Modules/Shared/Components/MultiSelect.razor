@@ -1,5 +1,14 @@
 @* Custom tag/category input component with visual pill/chip interface *@
 <div class="pill-input-container">
+    <TelerikAutoComplete @ref="@AutoCompleteRef"
+                         Data="@FilteredSuggestions"
+                         @bind-Value="@InputText"
+                         OnChange="@OnInputChange"
+                         Placeholder="@Placeholder"
+                         ShowClearButton="true"
+                         Width="@Width"
+                         Class="pill-input-field" />
+
     @if (InternalValue.Any())
     {
         <TelerikChipList Data="@ChipData"
@@ -9,15 +18,6 @@
                          Class="pill-input-chips">
         </TelerikChipList>
     }
-    
-    <TelerikAutoComplete @ref="@AutoCompleteRef"
-                         Data="@FilteredSuggestions"
-                         @bind-Value="@InputText"
-                         OnChange="@OnInputChange"
-                         Placeholder="@Placeholder"
-                         ShowClearButton="true"
-                         Width="@Width"
-                         Class="pill-input-field" />
 </div>
 
 @code {

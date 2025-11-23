@@ -52,7 +52,6 @@
     overflow-y: auto;
     flex: 1;
     min-height: 0;
-    padding-bottom: var(--spacing-md, 16px);
 }
 
 /* Scrollbar Styling */

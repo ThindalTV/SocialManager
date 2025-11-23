@@ -1,0 +1,13 @@
+@using Telerik.SvgIcons
+
+<div class="title-section">
+    <label class="title-label">Category</label>
+    <TelerikTextBox @bind-Value="Category"
+                    Placeholder="Category"
+                    Width="100%" />
+</div>
+
+@code {
+    [Parameter] public string? Category { get; set; }
+    [Parameter] public EventCallback<string?> CategoryChanged { get; set; }
+}

@@ -1,0 +1,56 @@
+@using Telerik.SvgIcons
+@inherits ComponentBase
+
+<div class="publishing-options">
+    <!-- Content Type Toggles -->
+    <div class="content-toggles">
+        <div class="toggle-item">
+            <TelerikSwitch @bind-Value="EnableBlogPost"
+                           OnLabel="Blog Post Enabled"
+                           OffLabel="Blog Post Disabled" />
+        </div>
+        <div class="toggle-item">
+            <TelerikSwitch @bind-Value="EnableSocialPosts"
+                           OnLabel="Social Posts Enabled"
+                           OffLabel="Social Posts Disabled" />
+        </div>
+    </div>
+
+    <!-- Publish Date Picker -->
+    <div class="publish-date-section">
+        <label class="title-label">Publish Date (Optional)</label>
+        <TelerikDateTimePicker @bind-Value="PublishDateLocal"
+                               Placeholder="Publish immediately"
+                               Format="yyyy-MM-dd HH:mm"
+                               Width="300px" />
+        @if (PublishDateLocal.HasValue)
+        {
+            <span class="date-helper">Scheduled for @PublishDateLocal.Value.ToString("f")</span>
+        }
+        else
+        {
+            <span class="date-helper">Will publish immediately when marked as published</span>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public bool EnableBlogPost { get; set; }
+    [Parameter] public EventCallback<bool> EnableBlogPostChanged { get; set; }
+
+    [Parameter] public bool EnableSocialPosts { get; set; }
+    [Parameter] public EventCallback<bool> EnableSocialPostsChanged { get; set; }
+
+    [Parameter] public DateTimeOffset? PublishDate { get; set; }
+    [Parameter] public EventCallback<DateTimeOffset?> PublishDateChanged { get; set; }
+
+    private DateTime? PublishDateLocal
+    {
+        get => PublishDate?.LocalDateTime;
+        set
+        {
+            var dto = value.HasValue ? new DateTimeOffset(value.Value) : (DateTimeOffset?)null;
+            PublishDateChanged.InvokeAsync(dto);
+        }
+    }
+}

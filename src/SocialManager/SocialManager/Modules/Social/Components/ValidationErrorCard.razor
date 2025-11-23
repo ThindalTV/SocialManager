@@ -1,0 +1,10 @@
+<div class="validation-error">
+    <TelerikSvgIcon Icon="@SvgIcon.ExclamationCircle" />
+    <div>
+        <strong>Cannot save:</strong> @Message
+    </div>
+</div>
+
+@code {
+    [Parameter] public string Message { get; set; } = "You must enable at least one content type (Blog Post or Social Posts) and provide content for it.";
+}

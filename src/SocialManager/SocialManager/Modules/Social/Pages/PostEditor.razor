@@ -25,7 +25,7 @@
                            Enabled="@(!IsSaving && CanSave)">
                 @(IsSaving ? "Saving..." : "Save")
             </TelerikButton>
-            <TelerikButton Icon="@(Model.IsPublished ? SvgIcon.Eye : SvgIcon.EyeSlash)"
+            <TelerikButton Icon="@(Model.IsPublished? SvgIcon.Eye: SvgIcon.EyeSlash)"
                            ThemeColor="@(Model.IsPublished ? ThemeConstants.Button.ThemeColor.Success : ThemeConstants.Button.ThemeColor.Warning)"
                            OnClick="@TogglePublish"
                            Enabled="@(!IsSaving && CanSave)">
@@ -45,7 +45,7 @@
             <!-- Title Input -->
             <div class="title-section">
                 <label class="title-label">Title</label>
-                <TelerikTextBox @bind-Value="@Model.Title" 
+                <TelerikTextBox @bind-Value="@Model.Title"
                                 Placeholder="Enter post title"
                                 Width="100%" />
             </div>
@@ -53,78 +53,39 @@
             <!-- Synopsis Input -->
             <div class="title-section">
                 <label class="title-label">Synopsis</label>
-                <TelerikTextArea @bind-Value="@Model.Synopsis" 
+                <TelerikTextArea @bind-Value="@Model.Synopsis"
                                  Placeholder="Enter a brief summary or excerpt"
                                  Rows="3"
                                  Width="100%" />
             </div>
 
-            <!-- Publishing Options Section -->
-            <div class="publishing-options">
-                <!-- Content Type Toggles -->
-                <div class="content-toggles">
-                    <div class="toggle-item">
-                        <TelerikSwitch @bind-Value="@Model.EnableBlogPost"
-                                       OnLabel="Blog Post Enabled"
-                                       OffLabel="Blog Post Disabled" />
-                    </div>
-                    <div class="toggle-item">
-                        <TelerikSwitch @bind-Value="@Model.EnableSocialPosts"
-                                       OnLabel="Social Posts Enabled"
-                                       OffLabel="Social Posts Disabled" />
-                    </div>
+            <div class="extra-options">
+                <!-- Publishing Options Section -->
+                <SocialManager.Modules.Social.Components.PublishingOptions EnableBlogPost="@Model.EnableBlogPost"
+                                    EnableBlogPostChanged="@(async (bool v) => Model.EnableBlogPost = v)"
+                                    EnableSocialPosts="@Model.EnableSocialPosts"
+                                    EnableSocialPostsChanged="@(async (bool v) => Model.EnableSocialPosts = v)"
+                                    PublishDate="@Model.PublishDate"
+                                    PublishDateChanged="@(async (DateTimeOffset? d) => Model.PublishDate = d)" />
+
+                <!-- Validation Message -->
+                @if (!CanSave)
+                {
+                    <SocialManager.Modules.Social.Components.ValidationErrorCard Message="You must enable at least one content type (Blog Post or Social Posts) and provide content for it." />
+                }
+
+                <!-- Tags and Categories Row -->
+                <div class="publishing-options">
+                    <SocialManager.Modules.Social.Components.CategoryCard Category="@Model.Category"
+                                  CategoryChanged="@(async (string? v) => Model.Category = v ?? string.Empty)" />
                 </div>
 
-                <!-- Publish Date Picker -->
-                <div class="publish-date-section">
-                    <label class="title-label">Publish Date (Optional)</label>
-                    <TelerikDateTimePicker @bind-Value="@Model.PublishDate"
-                                           Placeholder="Publish immediately"
-                                           Format="yyyy-MM-dd HH:mm"
-                                           Width="300px" />
-                    @if (Model.PublishDate.HasValue)
-                    {
-                        <span class="date-helper">Scheduled for @Model.PublishDate.Value.ToString("f")</span>
-                    }
-                    else
-                    {
-                        <span class="date-helper">Will publish immediately when marked as published</span>
-                    }
+                <div class="publishing-options">
+                    <SocialManager.Modules.Social.Components.TagsCard Tags="@Model.Tags"
+                                  TagsChanged="@(async (List<string>? newTags) => Model.Tags = newTags ?? new List<string>())"
+                                  AvailableTags="@AvailableTags" />
                 </div>
             </div>
-
-            <!-- Validation Message -->
-            @if (!CanSave)
-            {
-                <div class="validation-error">
-                    <TelerikSvgIcon Icon="@SvgIcon.ExclamationCircle" />
-                    <div>
-                        <strong>Cannot save:</strong> You must enable at least one content type (Blog Post or Social Posts) and provide content for it.
-                    </div>
-                </div>
-            }
-
-            <!-- Tags and Categories Row -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg);">
-                <!-- Tags Input -->
-                <div class="title-section">
-                    <label class="title-label">Tags</label>
-                    <MultiSelect Value="@Model.Tags"
-                              ValueChanged="@OnTagsChanged"
-                              AvailableValues="@AvailableTags"
-                              Placeholder="Select or type to add tags"
-                              Width="100%" />
-                </div>
-
-                <!-- Categories Input -->
-                <div class="title-section">
-                    <label class="title-label">Category</label>
-                    <TelerikTextBox @bind-Value="@Model.Category"
-                                    Placeholder="Category"
-                                    Width="100%" />
-                </div>
-            </div>
-
             <!-- Two Column Layout - Full Height -->
             <div class="editor-two-column">
                 <!-- Left Column - Blog Editor (60%) -->
@@ -136,7 +97,7 @@
                             <span>Blog post disabled</span>
                         </div>
                     }
-                    <LongFormEditor Content="@Model.BlogContent" 
+                    <LongFormEditor Content="@Model.BlogContent"
                                     ContentChanged="@UpdateBlogContent" />
                 </div>
 
@@ -153,7 +114,7 @@
                             </div>
                         </div>
                     }
-                    
+
                     <!-- Content -->
                     <div class="social-column-content">
                         <ShortFormEditor SharedText="@Model.SharedSocialText"
@@ -177,7 +138,7 @@
     // Available tags and categories for the TagInput components
     private List<string> AvailableTags { get; set; } = new();
     private List<string> AvailableCategories { get; set; } = new();
-    
+
     private List<BreadcrumbItem> BreadcrumbData { get; set; } = new()
     {
         new BreadcrumbItem { Text = "Home", Url = "/" },
@@ -206,7 +167,7 @@
             {
                 var hasSharedText = !string.IsNullOrWhiteSpace(Model.SharedSocialText);
                 var hasEnabledPlatform = Model.PlatformPosts?.Any(p => p.IsEnabled) ?? false;
-                
+
                 if (!hasSharedText && !hasEnabledPlatform)
                     return false;
             }
@@ -233,7 +194,7 @@
             if (entry != null)
             {
                 Model = entry;
-                
+
                 // Ensure all platforms are present by merging with defaults
                 Model.PlatformPosts = EnsureAllPlatformsPresent(Model.PlatformPosts);
             }

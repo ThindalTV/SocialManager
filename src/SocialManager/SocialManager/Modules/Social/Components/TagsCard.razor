@@ -1,0 +1,23 @@
+@using SocialManager.Modules.Shared.Components
+
+<div class="title-section">
+    <label class="title-label">Tags</label>
+    <MultiSelect Value="@Tags"
+                 ValueChanged="@OnTagsChangedInternal"
+                 AvailableValues="@AvailableTags"
+                 Placeholder="Select or type to add tags"
+                 Width="100%" />
+</div>
+
+@code {
+    [Parameter] public List<string>? Tags { get; set; } = new();
+    [Parameter] public EventCallback<List<string>?> TagsChanged { get; set; }
+
+    [Parameter] public List<string> AvailableTags { get; set; } = new();
+
+    private async Task OnTagsChangedInternal(List<string> newTags)
+    {
+        Tags = newTags;
+        await TagsChanged.InvokeAsync(newTags);
+    }
+}

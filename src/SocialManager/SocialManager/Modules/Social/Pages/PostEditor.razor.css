@@ -5,15 +5,23 @@
    using theme variables for consistency
    ============================================ */
 
+.extra-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-lg);
+    width: 100%;
+}
+
+    .extra-options > * {
+    }
 /* ============================================
    Main Container
    ============================================ */
-
 .editor-container {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    overflow: hidden;
+    min-height: 100vh; /* ensure container fills viewport and allows scrolling */
+    overflow: auto; /* allow scrolling when content exceeds viewport */
 }
 
 /* ============================================
@@ -65,13 +73,13 @@
 .editor-content-area {
     flex: 1;
     min-height: 0;
-    overflow: hidden;
+    overflow: auto; /* enable internal scrolling for content area */
     background-color: var(--color-background);
 }
 
 .content-inner {
     padding: var(--spacing-lg);
-    height: 100%;
+    /* allow the inner content to grow rather than forcing full height */
     display: flex;
     flex-direction: column;
     gap: var(--spacing-lg);
@@ -148,9 +156,9 @@
     color: #c00;
 }
 
-.validation-error strong {
-    font-weight: var(--font-weight-bold);
-}
+    .validation-error strong {
+        font-weight: var(--font-weight-bold);
+    }
 
 /* ============================================
    Two Column Layout
@@ -181,10 +189,10 @@
     position: relative;
 }
 
-.blog-editor-column.content-disabled {
-    opacity: 0.5;
-    pointer-events: none;
-}
+    .blog-editor-column.content-disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
 
 .disabled-badge-small {
     position: absolute;
@@ -249,12 +257,12 @@
     position: relative;
 }
 
-.social-column-disabled .social-column-content {
-    opacity: 0.3;
-    pointer-events: none;
-    user-select: none;
-    filter: blur(2px);
-}
+    .social-column-disabled .social-column-content {
+        opacity: 0.3;
+        pointer-events: none;
+        user-select: none;
+        filter: blur(2px);
+    }
 
 .disabled-overlay {
     position: absolute;
@@ -280,19 +288,19 @@
     backdrop-filter: blur(10px);
 }
 
-.disabled-badge h3 {
-    margin: var(--spacing-md, 16px) 0 var(--spacing-sm, 8px) 0;
-    font-size: var(--font-size-2xl, 1.75rem);
-    font-weight: var(--font-weight-bold, 700);
-    color: var(--color-text-inverse, #ffffff);
-}
+    .disabled-badge h3 {
+        margin: var(--spacing-md, 16px) 0 var(--spacing-sm, 8px) 0;
+        font-size: var(--font-size-2xl, 1.75rem);
+        font-weight: var(--font-weight-bold, 700);
+        color: var(--color-text-inverse, #ffffff);
+    }
 
-.disabled-badge p {
-    margin: 0;
-    font-size: var(--font-size-base, 1rem);
-    color: rgba(255, 255, 255, 0.9);
-    line-height: var(--line-height-relaxed, 1.75);
-}
+    .disabled-badge p {
+        margin: 0;
+        font-size: var(--font-size-base, 1rem);
+        color: rgba(255, 255, 255, 0.9);
+        line-height: var(--line-height-relaxed, 1.75);
+    }
 
 /* ============================================
    Shared Social Text Card
@@ -354,9 +362,9 @@
     transition: box-shadow var(--transition-base);
 }
 
-.platform-card:hover {
-    box-shadow: var(--shadow-md);
-}
+    .platform-card:hover {
+        box-shadow: var(--shadow-md);
+    }
 
 .platform-card-header {
     display: flex;
@@ -375,13 +383,13 @@
     /* Icon styling handled by Telerik */
 }
 
-.platform-icon.enabled {
-    color: var(--color-primary);
-}
+    .platform-icon.enabled {
+        color: var(--color-primary);
+    }
 
-.platform-icon.disabled {
-    color: var(--color-text-secondary);
-}
+    .platform-icon.disabled {
+        color: var(--color-text-secondary);
+    }
 
 .platform-name {
     font-weight: var(--font-weight-bold);
@@ -427,10 +435,10 @@
     color: var(--color-text-secondary);
 }
 
-.character-count-display.over-limit {
-    color: var(--color-error);
-    font-weight: var(--font-weight-bold);
-}
+    .character-count-display.over-limit {
+        color: var(--color-error);
+        font-weight: var(--font-weight-bold);
+    }
 
 /* ============================================
    Responsive Adjustments
@@ -477,13 +485,13 @@
         max-width: 300px;
     }
 
-    .disabled-badge h3 {
-        font-size: var(--font-size-xl, 1.5rem);
-    }
+        .disabled-badge h3 {
+            font-size: var(--font-size-xl, 1.5rem);
+        }
 
-    .disabled-badge p {
-        font-size: var(--font-size-sm, 0.875rem);
-    }
+        .disabled-badge p {
+            font-size: var(--font-size-sm, 0.875rem);
+        }
 
     .content-toggles {
         flex-direction: column;
