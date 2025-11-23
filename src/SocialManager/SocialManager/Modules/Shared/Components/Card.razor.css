@@ -8,3 +8,11 @@
 
 .card:hover {
 }
+
+/* When enabled, allow the card to expand to fill vertical space of its parent */
+.cardFillVertical {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}

@@ -128,15 +128,30 @@
 
 .content-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: var(--spacing-lg);
     flex: 1;
     min-height: 0;
 }
 
-@media (min-width: 1280px) {
+.recent-posts-section {
+    min-height: 0;
+}
+
+.sidebar-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+/* Ensure cards in sidebar fill width */
+.sidebar-column > :where(.card, .section-container) {
+    width: 100%;
+}
+
+@media (max-width: 1279px) {
     .content-grid {
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1fr;
     }
 }
 
@@ -376,11 +391,5 @@
     .post-item-header {
         flex-direction: column;
         align-items: flex-start;
-    }
-}
-
-@media (max-width: 1279px) {
-    .content-grid {
-        grid-template-columns: 1fr;
     }
 }

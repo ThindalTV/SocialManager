@@ -1,8 +1,11 @@
-﻿<div class="card">
+﻿<div class="card @(FillVertical ? "cardFillVertical" : string.Empty)">
     @ChildContent
 </div>
 @code {
 
     [Parameter]
     public required RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool FillVertical { get; set; } = false;
 }

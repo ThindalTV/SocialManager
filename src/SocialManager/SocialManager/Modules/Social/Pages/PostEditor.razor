@@ -70,12 +70,6 @@
                                     PublishDate="@Model.PublishDate"
                                     PublishDateChanged="@(async (DateTimeOffset? d) => Model.PublishDate = d)" />
 
-                <!-- Validation Message -->
-                @if (!CanSave)
-                {
-                    <ValidationErrorCard Message="You must enable at least one content type (Blog Post or Social Posts) and provide content for it." />
-                }
-
                 <!-- Tags and Categories Row -->
                 <CategoryCard Category="@Model.Category"
                               CategoryChanged="@(async (string? v) => Model.Category = v ?? string.Empty)" />
@@ -83,6 +77,12 @@
                 <TagsCard Tags="@Model.Tags"
                           TagsChanged="@(async (List<string>? newTags) => Model.Tags = newTags ?? new List<string>())"
                           AvailableTags="@AvailableTags" />
+
+                <!-- Validation Message -->
+                @if (!CanSave)
+                {
+                    <ValidationErrorCard Message="You must enable at least one content type (Blog Post or Social Posts) and provide content for it." />
+                }
             </div>
             <!-- Two Column Layout - Full Height -->
             <div class="editor-two-column">
@@ -95,8 +95,10 @@
                             <span>Blog post disabled</span>
                         </div>
                     }
-                    <LongFormEditor Content="@Model.BlogContent"
-                                    ContentChanged="@UpdateBlogContent" />
+                    <Card FillVertical="true">
+                        <LongFormEditor Content="@Model.BlogContent"
+                                        ContentChanged="@UpdateBlogContent" />
+                    </Card>
                 </div>
 
                 <!-- Right Column - Social Media Posts (40%) -->

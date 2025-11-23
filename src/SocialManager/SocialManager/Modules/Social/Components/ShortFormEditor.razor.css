@@ -1,34 +1,11 @@
-/* ============================================
-   Short Form Editor - Isolated Styles
-   ============================================
-   Styles for the social media posts section
-   ============================================ */
+/* Short Form Editor - minimal styles (card visuals provided by shared Card) */
 
-/* Main Container */
 .shortFormContainer {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-lg, 24px);
     min-height: 0;
     overflow: hidden;
-}
-
-/* Shared Social Text Card */
-.sharedTextCard {
-    background-color: var(--color-surface, #ffffff);
-    box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
-    border-radius: var(--radius-lg, 8px);
-    padding: var(--spacing-lg, 24px);
-}
-
-.sharedTextHeader {
-    font-size: var(--font-size-lg, 1.125rem);
-    font-weight: var(--font-weight-semibold, 600);
-    margin-bottom: var(--spacing-lg, 24px);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm, 8px);
-    color: var(--color-text-primary, #212121);
 }
 
 .sharedTextContent {
@@ -44,7 +21,6 @@
     font-size: var(--font-size-sm, 0.875rem);
 }
 
-/* Platform Cards Container */
 .platformCardsContainer {
     display: flex;
     flex-direction: column;
@@ -73,23 +49,8 @@
     background: var(--color-text-secondary, #757575);
 }
 
-/* Responsive Adjustments */
 @media (max-width: 767px) {
-    .shortFormContainer {
-        gap: var(--spacing-md, 16px);
-    }
-
-    .sharedTextCard {
-        padding: var(--spacing-md, 16px);
-        border-radius: var(--radius-md, 6px);
-    }
-
-    .sharedTextHeader {
-        font-size: var(--font-size-base, 1rem);
-        margin-bottom: var(--spacing-md, 16px);
-    }
-
-    .platformCardsContainer {
-        gap: var(--spacing-sm, 8px);
-    }
+    .shortFormContainer { gap: var(--spacing-md, 16px); }
+    .sharedTextContent { gap: var(--spacing-sm, 8px); }
+    .platformCardsContainer { gap: var(--spacing-sm, 8px); }
 }

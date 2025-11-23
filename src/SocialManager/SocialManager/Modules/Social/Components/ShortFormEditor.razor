@@ -1,9 +1,10 @@
 @using SocialManager.Shared.DTOs
 @using Telerik.SvgIcons
+@using SocialManager.Modules.Shared.Components
 
 <div class="shortFormContainer">
     <!-- Shared Social Text Card -->
-    <div class="sharedTextCard">
+    <Card>
         <h2 class="sharedTextHeader">
             <TelerikSvgIcon Icon="@SvgIcon.Share" />
             Shared Social Media Text
@@ -18,15 +19,17 @@
                 <span>@SharedText.Length characters</span>
             </div>
         </div>
-    </div>
+    </Card>
 
     <!-- Platform-Specific Cards - Scrollable with bottom padding -->
     <div class="platformCardsContainer">
         @foreach (var platform in PlatformPosts)
         {
-            <SocialPostEditor PlatformPost="@platform"
-                              SharedText="@SharedText"
-                              PlatformIcon="@GetPlatformIcon(platform.Platform)" />
+            <Card>
+                <SocialPostEditor PlatformPost="@platform"
+                                  SharedText="@SharedText"
+                                  PlatformIcon="@GetPlatformIcon(platform.Platform)" />
+            </Card>
         }
     </div>
 </div>

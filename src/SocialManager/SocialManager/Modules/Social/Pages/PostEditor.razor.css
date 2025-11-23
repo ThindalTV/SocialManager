@@ -59,6 +59,17 @@
     gap: var(--spacing-lg);
 }
 
+/* Extra options - 3 column layout */
+.extra-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.extra-options > * {
+    min-height: 0; /* allow cards to stretch */
+}
+
 /* Simple form sections */
 .title-section {
     display: flex;
@@ -80,6 +91,28 @@
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
     flex: 1;
+    min-height: 0;
+    align-items: stretch; /* ensure children stretch vertically */
+}
+
+/* Make direct children stretch so cards inside can fill column height */
+.editor-two-column > div {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* Ensure the longform Card fills the left column height and cards inside stretch */
+.editor-two-column .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+/* Ensure the LongFormEditor content expands inside the card */
+.editor-two-column .card .editorContainer {
+    flex: 1 1 auto;
     min-height: 0;
 }
 
@@ -139,4 +172,5 @@
     .header-actions { width: 100%; justify-content: flex-end; }
     .content-inner { padding: var(--spacing-md); }
     .editor-two-column { grid-template-columns: 1fr; }
+    .extra-options { grid-template-columns: 1fr; }
 }

@@ -6,10 +6,6 @@
 
 /* Main Container */
 .editorContainer {
-    background-color: var(--color-surface, #ffffff);
-    box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
-    border-radius: var(--radius-lg, 8px);
-    padding: var(--spacing-lg, 24px);
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -48,11 +44,6 @@
 
 /* Responsive Adjustments */
 @media (max-width: 767px) {
-    .editorContainer {
-        padding: var(--spacing-md, 16px);
-        border-radius: var(--radius-md, 6px);
-    }
-
     .editorHeader {
         font-size: var(--font-size-base, 1rem);
         margin-bottom: var(--spacing-md, 16px);

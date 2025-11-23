@@ -1,21 +1,11 @@
 /* ============================================
-   Social Post Editor - Isolated Styles
-   ============================================
-   Styles for individual platform post cards
+   Social Post Editor - minimal styles (card visuals provided by shared Card)
    ============================================ */
 
 /* Platform Card */
 .platformCard {
-    background-color: var(--color-surface, #ffffff);
-    box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
-    border-radius: var(--radius-lg, 8px);
-    padding: var(--spacing-md, 16px);
-    transition: box-shadow var(--transition-base, 0.2s ease);
+    /* visual styling provided by shared Card component */
 }
-
-    .platformCard:hover {
-        box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
-    }
 
 /* Card Header */
 .cardHeader {
@@ -78,11 +68,6 @@
 
 /* Responsive Adjustments */
 @media (max-width: 767px) {
-    .platformCard {
-        padding: var(--spacing-sm, 8px);
-        border-radius: var(--radius-md, 6px);
-    }
-
     .cardHeader {
         margin-bottom: var(--spacing-sm, 8px);
     }

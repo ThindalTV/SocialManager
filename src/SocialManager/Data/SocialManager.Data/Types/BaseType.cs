@@ -18,6 +18,12 @@ public class BaseType
     /// </summary>
     /// <remarks>This property is typically set by a background task.</remarks>
     public bool IsPublished { get; set; } = false;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the entity is a draft.
+    /// </summary>
+    /// <remarks>Defaults to true. When false, the entity is considered a non-draft (e.g., ready for publication).</remarks>
+    public bool IsDraft { get; set; } = true;
     
     /// <summary>
     /// Gets or sets the date and time when the entity was published.

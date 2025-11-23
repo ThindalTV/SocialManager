@@ -1,17 +1,18 @@
 ﻿@page "/"
 @using SocialManager.Services
 @using SocialManager.Shared.DTOs
+@using SocialManager.Modules.Shared.Components
 @inject IEntryService EntryService
 @inject NavigationManager Navigation
 
 <PageTitle>Dashboard - SocialManager</PageTitle>
 
-<div class="k-d-flex k-flex-col k-gap-lg k-p-lg k-h-full k-overflow-y-auto">
+<div class="dashboard-container">
     <!-- Page Header -->
-    <div class="k-d-flex k-justify-content-between k-align-items-center">
-        <div>
-            <h1 class="k-h2 k-m-0">Dashboard</h1>
-            <p class="k-color-subtle k-m-0">Welcome back! Here's what's happening with your content.</p>
+    <div class="dashboard-header">
+        <div class="header-content">
+            <h1 class="page-title">Dashboard</h1>
+            <p class="page-description">Welcome back! Here's what's happening with your content.</p>
         </div>
         <TelerikButton Icon="@SvgIcon.Plus"
                        ThemeColor="@ThemeConstants.Button.ThemeColor.Primary"
@@ -22,12 +23,12 @@
     </div>
 
     <!-- Stats Cards -->
-    <div class="k-d-grid k-grid-cols-1 k-grid-cols-md-2 k-grid-cols-xl-4 k-gap-md">
-        <div class="k-bg-surface k-elevation-1 k-rounded-lg k-p-lg">
-            <div class="k-d-flex k-justify-content-between k-align-items-start k-mb-md">
-                <div>
-                    <p class="k-font-size-sm k-color-subtle k-m-0">Total Posts</p>
-                    <h3 class="k-h2 k-m-0 k-mt-sm">@TotalPosts</h3>
+    <div class="stats-grid">
+        <Card>
+            <div class="stat-card-header">
+                <div class="stat-content">
+                    <p class="stat-label">Total Posts</p>
+                    <h3 class="stat-value">@TotalPosts</h3>
                 </div>
                 <TelerikAvatar ThemeColor="@ThemeConstants.Avatar.ThemeColor.Primary"
                                Type="AvatarType.Icon"
@@ -35,17 +36,17 @@
                     <TelerikSvgIcon Icon="@SvgIcon.File" />
                 </TelerikAvatar>
             </div>
-            <p class="k-font-size-sm k-color-subtle k-m-0">
+            <p class="stat-footer">
                 <TelerikSvgIcon Icon="@SvgIcon.ArrowUp" Size="@ThemeConstants.SvgIcon.Size.Small" />
                 @PublishedPosts published
             </p>
-        </div>
+        </Card>
 
-        <div class="k-bg-surface k-elevation-1 k-rounded-lg k-p-lg">
-            <div class="k-d-flex k-justify-content-between k-align-items-start k-mb-md">
-                <div>
-                    <p class="k-font-size-sm k-color-subtle k-m-0">Drafts</p>
-                    <h3 class="k-h2 k-m-0 k-mt-sm">@DraftPosts</h3>
+        <Card>
+            <div class="stat-card-header">
+                <div class="stat-content">
+                    <p class="stat-label">Drafts</p>
+                    <h3 class="stat-value">@DraftPosts</h3>
                 </div>
                 <TelerikAvatar ThemeColor="@ThemeConstants.Avatar.ThemeColor.Warning"
                                Type="AvatarType.Icon"
@@ -53,14 +54,14 @@
                     <TelerikSvgIcon Icon="@SvgIcon.Pencil" />
                 </TelerikAvatar>
             </div>
-            <p class="k-font-size-sm k-color-subtle k-m-0">Waiting to be published</p>
-        </div>
+            <p class="stat-footer">Waiting to be published</p>
+        </Card>
 
-        <div class="k-bg-surface k-elevation-1 k-rounded-lg k-p-lg">
-            <div class="k-d-flex k-justify-content-between k-align-items-start k-mb-md">
-                <div>
-                    <p class="k-font-size-sm k-color-subtle k-m-0">Active Platforms</p>
-                    <h3 class="k-h2 k-m-0 k-mt-sm">@ActivePlatforms</h3>
+        <Card>
+            <div class="stat-card-header">
+                <div class="stat-content">
+                    <p class="stat-label">Active Platforms</p>
+                    <h3 class="stat-value">@ActivePlatforms</h3>
                 </div>
                 <TelerikAvatar ThemeColor="@ThemeConstants.Avatar.ThemeColor.Tertiary"
                                Type="AvatarType.Icon"
@@ -68,14 +69,14 @@
                     <TelerikSvgIcon Icon="@SvgIcon.Share" />
                 </TelerikAvatar>
             </div>
-            <p class="k-font-size-sm k-color-subtle k-m-0">Connected social accounts</p>
-        </div>
+            <p class="stat-footer">Connected social accounts</p>
+        </Card>
 
-        <div class="k-bg-surface k-elevation-1 k-rounded-lg k-p-lg">
-            <div class="k-d-flex k-justify-content-between k-align-items-start k-mb-md">
-                <div>
-                    <p class="k-font-size-sm k-color-subtle k-m-0">Last Updated</p>
-                    <h3 class="k-h3 k-m-0 k-mt-sm">@LastUpdated</h3>
+        <Card>
+            <div class="stat-card-header">
+                <div class="stat-content">
+                    <p class="stat-label">Last Updated</p>
+                    <h3 class="stat-value">@LastUpdated</h3>
                 </div>
                 <TelerikAvatar ThemeColor="@ThemeConstants.Avatar.ThemeColor.Info"
                                Type="AvatarType.Icon"
@@ -83,123 +84,90 @@
                     <TelerikSvgIcon Icon="@SvgIcon.Clock" />
                 </TelerikAvatar>
             </div>
-            <p class="k-font-size-sm k-color-subtle k-m-0">Most recent activity</p>
-        </div>
+            <p class="stat-footer">Most recent activity</p>
+        </Card>
     </div>
 
     <!-- Quick Actions & Recent Activity -->
-    <div class="k-d-grid k-grid-cols-1 k-grid-cols-xl-12 k-gap-lg k-flex-1 k-min-h-0">
-        <!-- Recent Posts -->
-        <div class="k-col-span-xl-8 k-bg-surface k-elevation-1 k-rounded-lg k-p-lg k-d-flex k-flex-col">
-            <div class="k-d-flex k-justify-content-between k-align-items-center k-mb-lg">
-                <h2 class="k-h4 k-m-0">Recent Posts</h2>
-                <TelerikButton FillMode="@ThemeConstants.Button.FillMode.Flat"
-                               ThemeColor="@ThemeConstants.Button.ThemeColor.Primary"
-                               OnClick="@(() => Navigation.NavigateTo("/blog/entries"))">
-                    View All →
-                </TelerikButton>
-            </div>
-            
-            @if (RecentPosts?.Any() == true)
-            {
-                <div class="k-d-flex k-flex-col k-gap-md k-overflow-y-auto k-flex-1">
-                    @foreach (var post in RecentPosts)
-                    {
-                        <div class="k-border k-border-solid k-border-subtle k-rounded-md k-p-md k-cursor-pointer"
-                             style="transition: background-color 0.2s;"
-                             @onclick="@(() => Navigation.NavigateTo($"/blog/editor/{post.Id}"))">
-                            <div class="k-d-flex k-justify-content-between k-align-items-start k-gap-md">
-                                <div class="k-flex-1">
-                                    <div class="k-d-flex k-align-items-center k-gap-2 k-mb-sm">
-                                        <h3 class="k-h5 k-m-0">@post.Title</h3>
-                                        @if (post.IsPublished)
-                                        {
-                                            <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Success" Size="@ThemeConstants.Badge.Size.Small">
-                                                Published
-                                            </TelerikBadge>
-                                        }
-                                        else
-                                        {
-                                            <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Warning" Size="@ThemeConstants.Badge.Size.Small">
-                                                Draft
-                                            </TelerikBadge>
-                                        }
-                                    </div>
-                                    <div class="k-d-flex k-gap-4 k-font-size-sm k-color-subtle">
-                                        <span class="k-d-flex k-align-items-center k-gap-1">
-                                            <TelerikSvgIcon Icon="@SvgIcon.Clock" Size="@ThemeConstants.SvgIcon.Size.Small" />
-                                            @post.UpdatedDate?.ToString("MMM dd, yyyy")
-                                        </span>
-                                        @if (post.SocialPlatforms?.Any() == true)
-                                        {
-                                            <span class="k-d-flex k-align-items-center k-gap-1">
-                                                <TelerikSvgIcon Icon="@SvgIcon.Share" Size="@ThemeConstants.SvgIcon.Size.Small" />
-                                                @post.SocialPlatforms.Count platforms
-                                            </span>
-                                        }
-                                    </div>
-                                </div>
-                                <TelerikButton Icon="@SvgIcon.ChevronRight"
-                                               FillMode="@ThemeConstants.Button.FillMode.Flat"
-                                               Size="@ThemeConstants.Button.Size.Small" />
-                            </div>
-                        </div>
-                    }
-                </div>
-            }
-            else
-            {
-                <div class="k-d-flex k-flex-col k-align-items-center k-justify-content-center k-flex-1 k-gap-md k-py-xl">
-                    <TelerikSvgIcon Icon="@SvgIcon.File" Size="@ThemeConstants.SvgIcon.Size.ExtraExtraLarge" />
-                    <div class="k-text-center">
-                        <p class="k-font-weight-bold k-m-0">No posts yet</p>
-                        <p class="k-color-subtle k-m-0">Create your first post to get started</p>
-                    </div>
-                    <TelerikButton Icon="@SvgIcon.Plus"
+    <div class="content-grid">
+        <!-- Left: Recent Posts -->
+        <div class="recent-posts-section">
+            <Card>
+                <div class="section-header">
+                    <h2 class="section-title">Recent Posts</h2>
+                    <TelerikButton FillMode="@ThemeConstants.Button.FillMode.Flat"
                                    ThemeColor="@ThemeConstants.Button.ThemeColor.Primary"
-                                   OnClick="@(() => Navigation.NavigateTo("/blog/editor/new"))">
-                        Create Post
+                                   OnClick="@(() => Navigation.NavigateTo("/blog/entries"))">
+                        View All →
                     </TelerikButton>
                 </div>
-            }
+
+                @if (RecentPosts?.Any() == true)
+                {
+                    <div class="post-list">
+                        @foreach (var post in RecentPosts)
+                        {
+                            <div class="post-list-item" @onclick="@(() => Navigation.NavigateTo($"/blog/editor/{post.Id}"))">
+                                <div class="post-item-content">
+                                    <div class="post-item-body">
+                                        <div class="post-item-header">
+                                            <h3 class="post-item-title">@post.Title</h3>
+                                            @if (post.IsPublished)
+                                            {
+                                                <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Success" Size="@ThemeConstants.Badge.Size.Small">Published</TelerikBadge>
+                                            }
+                                            else
+                                            {
+                                                <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Warning" Size="@ThemeConstants.Badge.Size.Small">Draft</TelerikBadge>
+                                            }
+                                        </div>
+                                        <div class="post-item-meta">
+                                            <span class="meta-item">
+                                                <TelerikSvgIcon Icon="@SvgIcon.Clock" Size="@ThemeConstants.SvgIcon.Size.Small" />
+                                                @post.UpdatedDate?.ToString("MMM dd, yyyy")
+                                            </span>
+                                            @if (post.SocialPlatforms?.Any() == true)
+                                            {
+                                                <span class="meta-item">
+                                                    <TelerikSvgIcon Icon="@SvgIcon.Share" Size="@ThemeConstants.SvgIcon.Size.Small" />
+                                                    @post.SocialPlatforms.Count platforms
+                                                </span>
+                                            }
+                                        </div>
+                                    </div>
+                                    <TelerikButton Icon="@SvgIcon.ChevronRight" FillMode="@ThemeConstants.Button.FillMode.Flat" Size="@ThemeConstants.Button.Size.Small" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="empty-state">
+                        <TelerikSvgIcon Icon="@SvgIcon.File" Size="@ThemeConstants.SvgIcon.Size.ExtraExtraLarge" />
+                        <div class="empty-state-text">
+                            <p class="empty-state-title">No posts yet</p>
+                            <p class="empty-state-description">Create your first post to get started</p>
+                        </div>
+                        <TelerikButton Icon="@SvgIcon.Plus" ThemeColor="@ThemeConstants.Button.ThemeColor.Primary" OnClick="@(() => Navigation.NavigateTo("/blog/editor/new"))">Create Post</TelerikButton>
+                    </div>
+                }
+            </Card>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="k-col-span-xl-4 k-d-flex k-flex-col k-gap-lg">
-            <div class="k-bg-surface k-elevation-1 k-rounded-lg k-p-lg">
+        <!-- Right: Quick Actions & Platform Status -->
+        <div class="sidebar-column">
+            <Card>
                 <h2 class="k-h4 k-mb-lg">Quick Actions</h2>
                 <div class="k-d-flex k-flex-col k-gap-md">
-                    <TelerikButton Icon="@SvgIcon.File"
-                                   FillMode="@ThemeConstants.Button.FillMode.Outline"
-                                   ThemeColor="@ThemeConstants.Button.ThemeColor.Primary"
-                                   Class="k-justify-content-start"
-                                   OnClick="@(() => Navigation.NavigateTo("/blog/entries"))">
-                        Manage Blog Posts
-                    </TelerikButton>
-                    <TelerikButton Icon="@SvgIcon.Image"
-                                   FillMode="@ThemeConstants.Button.FillMode.Outline"
-                                   ThemeColor="@ThemeConstants.Button.ThemeColor.Primary"
-                                   Class="k-justify-content-start"
-                                   OnClick="@(() => Navigation.NavigateTo("/posts"))">
-                        Social Media Posts
-                    </TelerikButton>
-                    <TelerikButton Icon="@SvgIcon.Play"
-                                   FillMode="@ThemeConstants.Button.FillMode.Outline"
-                                   ThemeColor="@ThemeConstants.Button.ThemeColor.Primary"
-                                   Class="k-justify-content-start"
-                                   OnClick="@(() => Navigation.NavigateTo("/stream"))">
-                        Streaming Tools
-                    </TelerikButton>
-                    <TelerikButton Icon="@SvgIcon.Gear"
-                                   FillMode="@ThemeConstants.Button.FillMode.Outline"
-                                   ThemeColor="@ThemeConstants.Button.ThemeColor.Base"
-                                   Class="k-justify-content-start">
-                        Settings
-                    </TelerikButton>
+                    <TelerikButton Icon="@SvgIcon.File" FillMode="@ThemeConstants.Button.FillMode.Outline" ThemeColor="@ThemeConstants.Button.ThemeColor.Primary" Class="k-justify-content-start" OnClick="@(() => Navigation.NavigateTo("/blog/entries"))">Manage Blog Posts</TelerikButton>
+                    <TelerikButton Icon="@SvgIcon.Image" FillMode="@ThemeConstants.Button.FillMode.Outline" ThemeColor="@ThemeConstants.Button.ThemeColor.Primary" Class="k-justify-content-start" OnClick="@(() => Navigation.NavigateTo("/posts"))">Social Media Posts</TelerikButton>
+                    <TelerikButton Icon="@SvgIcon.Play" FillMode="@ThemeConstants.Button.FillMode.Outline" ThemeColor="@ThemeConstants.Button.ThemeColor.Primary" Class="k-justify-content-start" OnClick="@(() => Navigation.NavigateTo("/stream"))">Streaming Tools</TelerikButton>
+                    <TelerikButton Icon="@SvgIcon.Gear" FillMode="@ThemeConstants.Button.FillMode.Outline" ThemeColor="@ThemeConstants.Button.ThemeColor.Base" Class="k-justify-content-start">Settings</TelerikButton>
                 </div>
-            </div>
+            </Card>
 
-            <div class="k-bg-surface k-elevation-1 k-rounded-lg k-p-lg">
+            <Card>
                 <h2 class="k-h4 k-mb-lg">Platform Status</h2>
                 <div class="k-d-flex k-flex-col k-gap-md">
                     <div class="k-d-flex k-justify-content-between k-align-items-center">
@@ -207,30 +175,24 @@
                             <TelerikSvgIcon Icon="@SvgIcon.XLogo" Size="@ThemeConstants.SvgIcon.Size.Medium" />
                             <span>X (Twitter)</span>
                         </div>
-                        <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Success" Size="@ThemeConstants.Badge.Size.Small">
-                            Connected
-                        </TelerikBadge>
+                        <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Success" Size="@ThemeConstants.Badge.Size.Small">Connected</TelerikBadge>
                     </div>
                     <div class="k-d-flex k-justify-content-between k-align-items-center">
                         <div class="k-d-flex k-align-items-center k-gap-2">
                             <TelerikSvgIcon Icon="@SvgIcon.Linkedin" Size="@ThemeConstants.SvgIcon.Size.Medium" />
                             <span>LinkedIn</span>
                         </div>
-                        <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Success" Size="@ThemeConstants.Badge.Size.Small">
-                            Connected
-                        </TelerikBadge>
+                        <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Success" Size="@ThemeConstants.Badge.Size.Small">Connected</TelerikBadge>
                     </div>
                     <div class="k-d-flex k-justify-content-between k-align-items-center">
                         <div class="k-d-flex k-align-items-center k-gap-2">
                             <TelerikSvgIcon Icon="@SvgIcon.Facebook" Size="@ThemeConstants.SvgIcon.Size.Medium" />
                             <span>Facebook</span>
                         </div>
-                        <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Base" Size="@ThemeConstants.Badge.Size.Small">
-                            Not Connected
-                        </TelerikBadge>
+                        <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Base" Size="@ThemeConstants.Badge.Size.Small">Not Connected</TelerikBadge>
                     </div>
                 </div>
-            </div>
+            </Card>
         </div>
     </div>
 </div>
