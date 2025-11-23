@@ -2,7 +2,9 @@
 @using SocialManager.Modules.Shared.Components
 @using SocialManager.Shared.DTOs
 @using SocialManager.Services
+@using SocialManager.Modules.Social.Components
 @using Telerik.SvgIcons
+
 @inject IEntryService EntryService
 @inject NavigationManager Navigation
 
@@ -61,7 +63,7 @@
 
             <div class="extra-options">
                 <!-- Publishing Options Section -->
-                <SocialManager.Modules.Social.Components.PublishingOptions EnableBlogPost="@Model.EnableBlogPost"
+                <PublishingOptions EnableBlogPost="@Model.EnableBlogPost"
                                     EnableBlogPostChanged="@(async (bool v) => Model.EnableBlogPost = v)"
                                     EnableSocialPosts="@Model.EnableSocialPosts"
                                     EnableSocialPostsChanged="@(async (bool v) => Model.EnableSocialPosts = v)"
@@ -71,20 +73,16 @@
                 <!-- Validation Message -->
                 @if (!CanSave)
                 {
-                    <SocialManager.Modules.Social.Components.ValidationErrorCard Message="You must enable at least one content type (Blog Post or Social Posts) and provide content for it." />
+                    <ValidationErrorCard Message="You must enable at least one content type (Blog Post or Social Posts) and provide content for it." />
                 }
 
                 <!-- Tags and Categories Row -->
-                <div class="publishing-options">
-                    <SocialManager.Modules.Social.Components.CategoryCard Category="@Model.Category"
-                                  CategoryChanged="@(async (string? v) => Model.Category = v ?? string.Empty)" />
-                </div>
+                <CategoryCard Category="@Model.Category"
+                              CategoryChanged="@(async (string? v) => Model.Category = v ?? string.Empty)" />
 
-                <div class="publishing-options">
-                    <SocialManager.Modules.Social.Components.TagsCard Tags="@Model.Tags"
-                                  TagsChanged="@(async (List<string>? newTags) => Model.Tags = newTags ?? new List<string>())"
-                                  AvailableTags="@AvailableTags" />
-                </div>
+                <TagsCard Tags="@Model.Tags"
+                          TagsChanged="@(async (List<string>? newTags) => Model.Tags = newTags ?? new List<string>())"
+                          AvailableTags="@AvailableTags" />
             </div>
             <!-- Two Column Layout - Full Height -->
             <div class="editor-two-column">

@@ -1,13 +1,15 @@
 @using SocialManager.Modules.Shared.Components
 
-<div class="title-section">
-    <label class="title-label">Tags</label>
-    <MultiSelect Value="@Tags"
-                 ValueChanged="@OnTagsChangedInternal"
-                 AvailableValues="@AvailableTags"
-                 Placeholder="Select or type to add tags"
-                 Width="100%" />
-</div>
+<Card>
+    <div class="title-section">
+        <label class="title-label">Tags</label>
+        <MultiSelect Value="@Tags"
+                     ValueChanged="@OnTagsChangedInternal"
+                     AvailableValues="@AvailableTags"
+                     Placeholder="Select or type to add tags"
+                     Width="100%" />
+    </div>
+</Card>
 
 @code {
     [Parameter] public List<string>? Tags { get; set; } = new();

@@ -1,11 +1,14 @@
 @using Telerik.SvgIcons
+@using SocialManager.Modules.Shared.Components
 
-<div class="title-section">
-    <label class="title-label">Category</label>
-    <TelerikTextBox @bind-Value="Category"
-                    Placeholder="Category"
-                    Width="100%" />
-</div>
+<Card>
+    <div class="title-section">
+        <label class="title-label">Category</label>
+        <TelerikTextBox @bind-Value="Category"
+                        Placeholder="Category"
+                        Width="100%" />
+    </div>
+</Card>
 
 @code {
     [Parameter] public string? Category { get; set; }

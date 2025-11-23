@@ -1,13 +1,4 @@
-/* PublishingOptions component styles (mirror PostEditor publishing-options) */
-.publishing-options {
-    background-color: var(--color-surface);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-}
+/* PublishingOptions component styles - inner content only. Card component provides outer card styling */
 
 .content-toggles {
     display: flex;

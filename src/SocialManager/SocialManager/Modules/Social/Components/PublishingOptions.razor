@@ -1,7 +1,8 @@
 @using Telerik.SvgIcons
+@using SocialManager.Modules.Shared.Components
 @inherits ComponentBase
 
-<div class="publishing-options">
+<Card>
     <!-- Content Type Toggles -->
     <div class="content-toggles">
         <div class="toggle-item">
@@ -32,7 +33,7 @@
             <span class="date-helper">Will publish immediately when marked as published</span>
         }
     </div>
-</div>
+</Card>
 
 @code {
     [Parameter] public bool EnableBlogPost { get; set; }
