@@ -23,7 +23,7 @@ var apiProject = builder.AddProject<Projects.SocialManager_API>("SocialManagerAp
     .WithReference(tables)
     .WithReference(cosmosDatabase);
 
-builder.AddProject<Projects.SocialManager>("SocialManagerUI")
+builder.AddProject<Projects.SocialManager>("SocialManager")
     .WithReference(apiProject)
     .WaitFor(apiProject);
 
