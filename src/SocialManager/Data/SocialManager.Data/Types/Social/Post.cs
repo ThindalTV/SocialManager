@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a social media post containing content and metadata for publishing to a specific platform.
 /// </summary>
-public class SocialPost
+public class Post
 {
     /// <summary>
     /// Gets or sets the social media platform identifier (e.g., "Twitter", "Facebook", "LinkedIn").

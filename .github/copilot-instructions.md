@@ -27,10 +27,10 @@ SocialManager is a social media management application built with .NET 9.0, usin
 
 ### `/tests/` - Unit Tests
 - Location for all test projects
-- Structure for unit test projects is `/tests/{ProjectName}.Tests/`.
+- Structure for unit test projects is `/tests/{ProjectPath}/{ProjectName}.Tests/`. ProjectPath is optional if the project is in the "root".
 - Each test file should correspond to a source file in the main projects.
 - The files are placed in the same folder structure as the source file being tested.
-- The files are Suffixed by `.Tests`.
+- The files are Suffixed by `Tests`.
 - Use xUnit as the testing framework.
 
 ## Coding Standards

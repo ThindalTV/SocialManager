@@ -42,4 +42,7 @@
     <Project Path="tests/Admin/SocialManager.Admin.API.Tests/SocialManager.Admin.API.Tests.csproj" Id="e5da03fe-ab9c-4241-a144-a8edbb4804d0" />
     <Project Path="tests/Admin/SocialManager.Admin.Tests/SocialManager.Admin.Tests.csproj" Id="f2a35fd3-7850-4d06-852e-5e6d0facf470" />
   </Folder>
+  <Folder Name="/tests/SocialProviders/">
+    <Project Path="tests/SocialProviders/SocialManager.SocialProvider.X.Tests/SocialManager.SocialProvider.X.Tests.csproj" />
+  </Folder>
 </Solution>

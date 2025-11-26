@@ -10,7 +10,7 @@ public class Entry : BaseType
     /// </summary>
     public string Title { get; set; } = string.Empty;
 
-    public BlogPost? BlogPost { get; set; }
+    public Blog.Post? BlogPost { get; set; }
 
-    public List<SocialPost> SocialPosts { get; set; } = [];
+    public List<Social.Post> SocialPosts { get; set; } = [];
 }

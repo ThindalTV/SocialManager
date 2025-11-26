@@ -14,6 +14,8 @@ public class SocialManagerDbContext : DbContext
 
     public DbSet<Entry> Entries => Set<Entry>();
 
+    public DbSet<Statistic> Statistics => Set<Statistic>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -37,7 +39,7 @@ public class SocialManagerDbContext : DbContext
             // Add discriminator for derived types
             entity.HasDiscriminator<string>("EntryType")
                 .HasValue<Entry>("Entry")
-                .HasValue<BlogPost>("BlogPost");
+                .HasValue<Types.Blog.Post>("BlogPost");
         });
     }
 }

@@ -4,7 +4,7 @@
 /// <summary>
 /// Represents a blog post entry with content, synopsis, and categorization.
 /// </summary>
-public class BlogPost
+public class Post
 {
     // Blog post specific data
     
