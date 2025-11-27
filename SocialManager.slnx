@@ -31,6 +31,7 @@
     <Project Path="src/SocialManager/Data/SocialManager.Data/SocialManager.Data.csproj" Id="8d68fdbf-c6f1-4d99-bd6c-cabe6d3e2255" />
   </Folder>
   <Folder Name="/src/SocialManager/SocialProviders/">
+    <Project Path="src/SocialManager/SocialProviders/SocialManager.SocialProvider.BlueSky/SocialManager.SocialProvider.BlueSky.csproj" Id="33411433-66c5-41ac-95c8-5ce3edb8b110" />
     <Project Path="src/SocialManager/SocialProviders/SocialManager.SocialProvider.X/SocialManager.SocialProvider.X.csproj" Id="b17640c0-fa08-4880-9519-da3de731ab00" />
     <Project Path="src/SocialManager/SocialProviders/SocialProvider/SocialProvider.csproj" Id="45c19530-8725-4a71-91ab-1cb1af91a1e7" />
   </Folder>
@@ -43,6 +44,7 @@
     <Project Path="tests/Admin/SocialManager.Admin.Tests/SocialManager.Admin.Tests.csproj" Id="f2a35fd3-7850-4d06-852e-5e6d0facf470" />
   </Folder>
   <Folder Name="/tests/SocialProviders/">
+    <Project Path="tests/SocialProviders/SocialManager.SocialProvider.BlueSky.Tests/SocialManager.SocialProvider.BlueSky.Tests.csproj" Id="5a86c2f4-bbc6-484c-b530-d67b228bb9a1" />
     <Project Path="tests/SocialProviders/SocialManager.SocialProvider.X.Tests/SocialManager.SocialProvider.X.Tests.csproj" />
   </Folder>
 </Solution>
