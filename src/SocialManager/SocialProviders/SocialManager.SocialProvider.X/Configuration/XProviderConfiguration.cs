@@ -14,7 +14,6 @@ public class XProviderConfiguration : ISocialProviderConfiguration
     public bool Active { get; set; } = true;
 
     /// <inheritdoc />
-    public string Platform { get; set; } = "X";
 
     /// <summary>
     /// Gets or sets the API Key (Consumer Key) from X Developer Portal.

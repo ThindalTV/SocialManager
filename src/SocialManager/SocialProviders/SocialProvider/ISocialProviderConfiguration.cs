@@ -9,9 +9,4 @@ public interface ISocialProviderConfiguration
     /// Gets or sets whether this social provider is enabled.
     /// </summary>
     bool Active { get; set; }
-
-    /// <summary>
-    /// Gets or sets the platform identifier (e.g., "X", "Facebook", "LinkedIn").
-    /// </summary>
-    string Platform { get; set; }
 }

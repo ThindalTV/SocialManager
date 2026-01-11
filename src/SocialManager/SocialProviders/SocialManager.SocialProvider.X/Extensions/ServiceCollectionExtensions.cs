@@ -51,6 +51,7 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IXApiClient, LinqToTwitterApiClient>();
         services.AddSingleton<ISocialProvider, XProvider>();
+        services.AddSingleton<XProvider, XProvider>();
 
         return services;
     }

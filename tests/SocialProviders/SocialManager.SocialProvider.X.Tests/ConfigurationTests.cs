@@ -87,7 +87,6 @@ public class ConfigurationTests
         config.AccessTokenSecret.Should().BeEmpty();
         config.BearerToken.Should().BeNull();
         config.Active.Should().BeTrue();
-        config.Platform.Should().Be("X");
     }
 
     [Fact]
@@ -96,10 +95,8 @@ public class ConfigurationTests
         var config = new XProviderConfiguration
         {
             Active = false,
-            Platform = "Twitter"
         };
 
         config.Active.Should().BeFalse();
-        config.Platform.Should().Be("Twitter");
     }
 }
