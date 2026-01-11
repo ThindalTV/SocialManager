@@ -9,17 +9,14 @@
   </Folder>
   <Folder Name="/src/">
     <File Path=".github/copilot-instructions.md" />
-    <Project Path="src/SocialManager/SocialManager.Shared/SocialManager.Shared.csproj" Id="97df0bee-1d69-4822-bafa-8cccadf75275" />
   </Folder>
   <Folder Name="/src/Aspire/">
     <Project Path="src/Aspire/SocialManager.Aspire.Host/SocialManager.Aspire.Host.csproj" />
     <Project Path="src/Aspire/SocialManager.Aspire.ServiceDefaults/SocialManager.Aspire.ServiceDefaults.csproj" />
   </Folder>
-  <Folder Name="/src/EricJohansson.se/">
-    <Project Path="src/EricJohansson.se/Blog/Blog.csproj" />
-  </Folder>
   <Folder Name="/src/SocialManager/">
     <Project Path="src/SocialManager/SocialManager.API/SocialManager.API.csproj" />
+    <Project Path="src/SocialManager/SocialManager.Shared/SocialManager.Shared.csproj" Id="97df0bee-1d69-4822-bafa-8cccadf75275" />
     <Project Path="src/SocialManager/SocialManager/SocialManager.csproj" />
   </Folder>
   <Folder Name="/src/SocialManager/ChatProviders/">

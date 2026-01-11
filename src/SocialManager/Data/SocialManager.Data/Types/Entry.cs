@@ -1,16 +1,24 @@
-﻿using SocialManager.Data.Types.Blog;
-using SocialManager.Data.Types.Social;
+﻿using SocialManager.Data.Types.Social;
 
 namespace SocialManager.Data.Types;
 
+/// <summary>
+/// Represents a collection containing blog content and social media posts with associated metadata.
+/// </summary>
 public class Entry : BaseType
 {
     /// <summary>
-    /// Gets or sets the title of the entry.
+    /// The title.
     /// </summary>
     public string Title { get; set; } = string.Empty;
 
-    public Blog.Post? BlogPost { get; set; }
+    /// <summary>
+    /// The blog post content and categorization.
+    /// </summary>
+    public PostCollection? BlogPost { get; set; }
 
+    /// <summary>
+    /// The list of social media posts.
+    /// </summary>
     public List<Social.Post> SocialPosts { get; set; } = [];
 }

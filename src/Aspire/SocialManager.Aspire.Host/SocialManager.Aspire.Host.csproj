@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\EricJohansson.se\Blog\Blog.csproj" />
     <ProjectReference Include="..\..\SocialManager\SocialManager.API\SocialManager.API.csproj" />
     <ProjectReference Include="..\..\SocialManager\SocialManager\SocialManager.csproj" />
   </ItemGroup>

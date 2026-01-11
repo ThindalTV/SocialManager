@@ -7,21 +7,8 @@ public class PostEditorResponseDto
 {
     public string Id { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;
-    public string Synopsis { get; set; } = string.Empty;
-    public string BlogContent { get; set; } = string.Empty;
-    public string? RawContent { get; set; }
     public string SharedSocialText { get; set; } = string.Empty;
     public bool IsPublished { get; set; }
-    
-    /// <summary>
-    /// Gets or sets whether the blog post should be created/posted
-    /// </summary>
-    public bool EnableBlogPost { get; set; } = true;
-    
-    /// <summary>
-    /// Gets or sets whether social media posts should be created/posted
-    /// </summary>
-    public bool EnableSocialPosts { get; set; } = true;
     
     /// <summary>
     /// Gets or sets the scheduled publish date. If null, publishes immediately when IsPublished is true.

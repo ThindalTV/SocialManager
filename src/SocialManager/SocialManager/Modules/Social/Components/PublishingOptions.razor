@@ -1,22 +1,9 @@
+@using SocialManager.Modules.Social.Components.Events
 @using Telerik.SvgIcons
 @using SocialManager.Modules.Shared.Components
 @inherits ComponentBase
 
 <Card>
-    <!-- Content Type Toggles -->
-    <div class="content-toggles">
-        <div class="toggle-item">
-            <TelerikSwitch @bind-Value="EnableBlogPost"
-                           OnLabel="Blog Post Enabled"
-                           OffLabel="Blog Post Disabled" />
-        </div>
-        <div class="toggle-item">
-            <TelerikSwitch @bind-Value="EnableSocialPosts"
-                           OnLabel="Social Posts Enabled"
-                           OffLabel="Social Posts Disabled" />
-        </div>
-    </div>
-
     <!-- Publish Date Picker -->
     <div class="publish-date-section">
         <label class="title-label">Publish Date (Optional)</label>
@@ -33,17 +20,19 @@
             <span class="date-helper">Will publish immediately when marked as published</span>
         }
     </div>
+
+    <div class="publish-state">
+        <TelerikSwitch @bind-Value="@PostState"
+                       OnLabel="@(PostState ? "Published" : "Scheduled")"
+                       OffLabel="Draft" OnChange="PublishedStateChanged" />
+    </div>
 </Card>
 
 @code {
-    [Parameter] public bool EnableBlogPost { get; set; }
-    [Parameter] public EventCallback<bool> EnableBlogPostChanged { get; set; }
-
-    [Parameter] public bool EnableSocialPosts { get; set; }
-    [Parameter] public EventCallback<bool> EnableSocialPostsChanged { get; set; }
-
+    [Parameter] public bool PostState { get; set; } // True if already posted
     [Parameter] public DateTimeOffset? PublishDate { get; set; }
     [Parameter] public EventCallback<DateTimeOffset?> PublishDateChanged { get; set; }
+    [Parameter] public EventCallback<PublishedStateChangedEventArgs> PublishStateChanged { get; set; }
 
     private DateTime? PublishDateLocal
     {
@@ -54,4 +43,11 @@
             PublishDateChanged.InvokeAsync(dto);
         }
     }
+
+    public async Task PublishedStateChanged()
+    {
+        await PublishStateChanged.InvokeAsync(new PublishedStateChangedEventArgs(PublishDateLocal, PostState));
+    }
+
+
 }

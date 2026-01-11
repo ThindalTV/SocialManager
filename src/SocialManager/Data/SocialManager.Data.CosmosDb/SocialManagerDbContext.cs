@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using SocialManager.Data.Types;
-using SocialManager.Data.Types.Blog;
 using SocialManager.Data.Types.Social;
 
 namespace SocialManager.Data.CosmosDb;
@@ -39,7 +38,7 @@ public class SocialManagerDbContext : DbContext
             // Add discriminator for derived types
             entity.HasDiscriminator<string>("EntryType")
                 .HasValue<Entry>("Entry")
-                .HasValue<Types.Blog.Post>("BlogPost");
+                .HasValue<PostCollection>("BlogPost");
         });
     }
 }

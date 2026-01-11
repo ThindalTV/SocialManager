@@ -6,37 +6,37 @@
 public class Statistic
 {
     /// <summary>
-    /// Gets or sets the unique identifier of the post.
+    /// The unique identifier of the post.
     /// </summary>
     public required string PostId { get; set; }
     
     /// <summary>
-    /// Gets or sets the title of the post.
+    /// The title of the post.
     /// </summary>
     public required string Title { get; set; }
     
     /// <summary>
-    /// Gets or sets the social media platform where the post was published.
+    /// The social media platform where the post was published.
     /// </summary>
     public required string Platform { get; set; }
 
     /// <summary>
-    /// Gets or sets the date and time at which the data was retrieved.
+    /// The date and time at which the data was retrieved.
     /// </summary>
     public required DateTime RetrievedAt { get; set; } = DateTime.Now;
     
     /// <summary>
-    /// Gets or sets the number of likes the post has received.
+    /// The number of likes the post has received.
     /// </summary>
     public int? Likes { get; set; }
     
     /// <summary>
-    /// Gets or sets the number of times the post has been shared.
+    /// The number of times the post has been shared.
     /// </summary>
     public int? Shares { get; set; }
     
     /// <summary>
-    /// Gets or sets the number of comments the post has received.
+    /// The number of comments the post has received.
     /// </summary>
     public int? Comments { get; set; }
 }

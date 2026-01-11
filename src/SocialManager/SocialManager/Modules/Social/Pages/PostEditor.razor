@@ -1,5 +1,6 @@
-@page "/blog/editor/{Id}"
+@page "/social/editor/{Id}"
 @using SocialManager.Modules.Shared.Components
+@using SocialManager.Modules.Social.Components.Events
 @using SocialManager.Shared.DTOs
 @using SocialManager.Services
 @using SocialManager.Modules.Social.Components
@@ -52,23 +53,12 @@
                                 Width="100%" />
             </div>
 
-            <!-- Synopsis Input -->
-            <div class="title-section">
-                <label class="title-label">Synopsis</label>
-                <TelerikTextArea @bind-Value="@Model.Synopsis"
-                                 Placeholder="Enter a brief summary or excerpt"
-                                 Rows="3"
-                                 Width="100%" />
-            </div>
-
             <div class="extra-options">
                 <!-- Publishing Options Section -->
-                <PublishingOptions EnableBlogPost="@Model.EnableBlogPost"
-                                    EnableBlogPostChanged="@(async (bool v) => Model.EnableBlogPost = v)"
-                                    EnableSocialPosts="@Model.EnableSocialPosts"
-                                    EnableSocialPostsChanged="@(async (bool v) => Model.EnableSocialPosts = v)"
-                                    PublishDate="@Model.PublishDate"
-                                    PublishDateChanged="@(async (DateTimeOffset? d) => Model.PublishDate = d)" />
+                <PublishingOptions PublishDate="@Model.PublishDate"
+                                   PostState="@Model.IsPublished"
+                                   PublishDateChanged="@(async (DateTimeOffset? d) => Model.PublishDate = d)"
+                                   PublishStateChanged="OnPublishChanged" />
 
                 <!-- Tags and Categories Row -->
                 <CategoryCard Category="@Model.Category"
@@ -84,45 +74,9 @@
                     <ValidationErrorCard Message="You must enable at least one content type (Blog Post or Social Posts) and provide content for it." />
                 }
             </div>
-            <!-- Two Column Layout - Full Height -->
-            <div class="editor-two-column">
-                <!-- Left Column - Blog Editor (60%) -->
-                <div class="blog-editor-column @(Model.EnableBlogPost ? "" : "content-disabled")">
-                    @if (!Model.EnableBlogPost)
-                    {
-                        <div class="disabled-badge-small">
-                            <TelerikSvgIcon Icon="@SvgIcon.X" />
-                            <span>Blog post disabled</span>
-                        </div>
-                    }
-                    <Card FillVertical="true">
-                        <LongFormEditor Content="@Model.BlogContent"
-                                        ContentChanged="@UpdateBlogContent" />
-                    </Card>
-                </div>
-
-                <!-- Right Column - Social Media Posts (40%) -->
-                <div class="social-column @(Model.EnableSocialPosts ? "" : "social-column-disabled")">
-                    <!-- Disabled Overlay -->
-                    @if (!Model.EnableSocialPosts)
-                    {
-                        <div class="disabled-overlay">
-                            <div class="disabled-badge">
-                                <TelerikSvgIcon Icon="@SvgIcon.X" Size="@ThemeConstants.SvgIcon.Size.ExtraLarge" />
-                                <h3>Social Posts Disabled</h3>
-                                <p>Enable social posts to create platform-specific content</p>
-                            </div>
-                        </div>
-                    }
-
-                    <!-- Content -->
-                    <div class="social-column-content">
-                        <ShortFormEditor SharedText="@Model.SharedSocialText"
-                                         SharedTextChanged="@UpdateSharedText"
-                                         PlatformPosts="@Model.PlatformPosts" />
-                    </div>
-                </div>
-            </div>
+            <ShortFormEditor SharedText="@Model.SharedSocialText"
+                             SharedTextChanged="@UpdateSharedText"
+                             PlatformPosts="@Model.PlatformPosts" />
         </div>
     </div>
 </div>
@@ -142,8 +96,8 @@
     private List<BreadcrumbItem> BreadcrumbData { get; set; } = new()
     {
         new BreadcrumbItem { Text = "Home", Url = "/" },
-        new BreadcrumbItem { Text = "Blog", Url = "/blog" },
-        new BreadcrumbItem { Text = "Entries", Url = "/blog/entries" },
+        new BreadcrumbItem { Text = "Social", Url = "/social" },
+        new BreadcrumbItem { Text = "Entries", Url = "/social/posts" },
         new BreadcrumbItem { Text = "Editor", Url = "#" }
     };
 
@@ -154,23 +108,11 @@
     {
         get
         {
-            // Must have at least one content type enabled
-            if (!Model.EnableBlogPost && !Model.EnableSocialPosts)
+            var hasSharedText = !string.IsNullOrWhiteSpace(Model.SharedSocialText);
+            var hasEnabledPlatform = Model.PlatformPosts?.Any(p => p.IsEnabled) ?? false;
+
+            if (!hasSharedText && !hasEnabledPlatform)
                 return false;
-
-            // If blog post is enabled, must have blog content
-            if (Model.EnableBlogPost && string.IsNullOrWhiteSpace(Model.BlogContent))
-                return false;
-
-            // If social posts are enabled, must have shared text or at least one platform enabled with content
-            if (Model.EnableSocialPosts)
-            {
-                var hasSharedText = !string.IsNullOrWhiteSpace(Model.SharedSocialText);
-                var hasEnabledPlatform = Model.PlatformPosts?.Any(p => p.IsEnabled) ?? false;
-
-                if (!hasSharedText && !hasEnabledPlatform)
-                    return false;
-            }
 
             return true;
         }
@@ -182,9 +124,7 @@
         {
             Model = new PostEditorResponseDto
             {
-                Title = "New Blog Post",
-                EnableBlogPost = true,
-                EnableSocialPosts = true,
+                Title = "New social post",
                 PlatformPosts = GetDefaultPlatformPosts()
             };
         }
@@ -201,7 +141,7 @@
             else
             {
                 // Entry not found, redirect to list
-                Navigation.NavigateTo("/blog/entries");
+                Navigation.NavigateTo("/social/posts");
             }
         }
 
@@ -249,11 +189,6 @@
         Model.Tags = tags;
     }
 
-    private void UpdateBlogContent(string content)
-    {
-        Model.BlogContent = content;
-    }
-
     private void UpdateSharedText(string text)
     {
         Model.SharedSocialText = text;
@@ -270,7 +205,7 @@
             if (IsNew)
             {
                 var newId = await EntryService.CreateEntryAsync(Model);
-                Navigation.NavigateTo($"/blog/editor/{newId}");
+                Navigation.NavigateTo($"/social/editor/{newId}");
             }
             else
             {
@@ -294,7 +229,7 @@
 
     private void GoBack()
     {
-        Navigation.NavigateTo("/blog/entries");
+        Navigation.NavigateTo("/social/posts");
     }
 
     private static List<PlatformPostDto> GetDefaultPlatformPosts()
@@ -318,5 +253,9 @@
     {
         public string Text { get; set; } = string.Empty;
         public string Url { get; set; } = string.Empty;
+    }
+    private void OnPublishChanged(PublishedStateChangedEventArgs args)
+    {
+        throw new NotImplementedException();
     }
 }

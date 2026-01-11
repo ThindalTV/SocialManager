@@ -27,11 +27,4 @@ builder.AddProject<Projects.SocialManager>("SocialManager")
     .WithReference(apiProject)
     .WaitFor(apiProject);
 
-// Blog for devtest
-builder.AddProject<Projects.Blog>("Blog", launchProfileName: "http")
-    .WithReference(blobs)
-    .WithReference(queues)
-    .WithReference(tables)
-    .WithReference(cosmosDatabase);
-
 builder.Build().Run();

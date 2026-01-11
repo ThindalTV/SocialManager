@@ -2,7 +2,7 @@
 @using Telerik.SvgIcons
 @using SocialManager.Modules.Shared.Components
 
-<div class="shortFormContainer">
+<div class="shortFormShared">
     <!-- Shared Social Text Card -->
     <Card>
         <h2 class="sharedTextHeader">
@@ -20,9 +20,9 @@
             </div>
         </div>
     </Card>
+</div>
 
-    <!-- Platform-Specific Cards - Scrollable with bottom padding -->
-    <div class="platformCardsContainer">
+<div class="shortFormContainer">
         @foreach (var platform in PlatformPosts)
         {
             <Card>
@@ -31,7 +31,6 @@
                                   PlatformIcon="@GetPlatformIcon(platform.Platform)" />
             </Card>
         }
-    </div>
 </div>
 
 @code {

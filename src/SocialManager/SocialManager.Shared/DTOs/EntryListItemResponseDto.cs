@@ -10,7 +10,6 @@ public class EntryListItemResponseDto
     public DateTimeOffset? CreatedDate { get; set; }
     public DateTimeOffset? UpdatedDate { get; set; }
     public bool IsPublished { get; set; }
-    public bool HasBlogPost { get; set; }
     
     // Platform indicators
     public List<string> SocialPlatforms { get; set; } = [];

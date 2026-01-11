@@ -1,4 +1,4 @@
-@page "/blog/entries"
+@page "/social/posts"
 @using SocialManager.Services
 @using SocialManager.Shared.DTOs
 @using Telerik.DataSource
@@ -6,14 +6,11 @@
 @inject IEntryService EntryService
 @inject NavigationManager Navigation
 
-<PageTitle>Blog Entries - SocialManager</PageTitle>
+<PageTitle>Social Network Posts</PageTitle>
 
 <div class="k-d-flex k-flex-col k-h-full k-p-lg k-gap-lg">
     <!-- Page Header -->
-    <div class="k-d-flex k-flex-col k-gap-md">
-        <h1 class="k-h2 k-m-0">Blog Management</h1>
-        <TelerikBreadcrumb Data="@BreadcrumbData" TextField="Text" UrlField="Url" />
-    </div>
+    <TelerikBreadcrumb Data="@BreadcrumbData" TextField="Text" UrlField="Url" />
 
     <!-- Grid Container -->
     <div class="k-flex-1 k-min-h-0">
@@ -28,15 +25,15 @@
                      Height="100%"
                      Class="k-elevation-2">
             <GridToolBarTemplate>
-                <TelerikButton Icon="@SvgIcon.Plus" 
+                <TelerikButton Icon="@SvgIcon.Plus"
                                ThemeColor="@ThemeConstants.Button.ThemeColor.Primary"
                                OnClick="@CreateNewEntry">
                     New Entry
                 </TelerikButton>
             </GridToolBarTemplate>
             <GridColumns>
-                <GridColumn Field="@nameof(EntryListItemResponseDto.Title)" 
-                            Title="Title" 
+                <GridColumn Field="@nameof(EntryListItemResponseDto.Title)"
+                            Title="Title"
                             Width="300px">
                     <Template>
                         @{
@@ -49,18 +46,18 @@
                     </Template>
                 </GridColumn>
 
-                <GridColumn Field="@nameof(EntryListItemResponseDto.CreatedDate)" 
-                            Title="Created" 
+                <GridColumn Field="@nameof(EntryListItemResponseDto.CreatedDate)"
+                            Title="Created"
                             DisplayFormat="{0:g}"
                             Width="180px" />
 
-                <GridColumn Field="@nameof(EntryListItemResponseDto.UpdatedDate)" 
-                            Title="Updated" 
+                <GridColumn Field="@nameof(EntryListItemResponseDto.UpdatedDate)"
+                            Title="Updated"
                             DisplayFormat="{0:g}"
                             Width="180px" />
 
-                <GridColumn Field="@nameof(EntryListItemResponseDto.IsPublished)" 
-                            Title="Status" 
+                <GridColumn Field="@nameof(EntryListItemResponseDto.IsPublished)"
+                            Title="Status"
                             Filterable="false"
                             Width="120px">
                     <Template>
@@ -78,28 +75,8 @@
                     </Template>
                 </GridColumn>
 
-                <GridColumn Title="Content" 
-                            Filterable="false" 
-                            Sortable="false"
-                            Width="150px">
-                    <Template>
-                        @{
-                            var item = (EntryListItemResponseDto)context;
-                            @if (item.HasBlogPost)
-                            {
-                                <div class="k-d-flex k-align-items-center k-gap-2">
-                                    <TelerikSvgIcon Icon="@SvgIcon.File" Size="@ThemeConstants.SvgIcon.Size.Small" />
-                                    <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Info">
-                                        Blog
-                                    </TelerikBadge>
-                                </div>
-                            }
-                        }
-                    </Template>
-                </GridColumn>
-
-                <GridColumn Title="Social Platforms" 
-                            Filterable="false" 
+                <GridColumn Title="Social Platforms"
+                            Filterable="false"
                             Sortable="false"
                             Width="350px">
                     <Template>
@@ -110,7 +87,7 @@
                                 {
                                     <div class="k-d-flex k-align-items-center k-gap-1">
                                         <TelerikSvgIcon Icon="@GetPlatformIcon(platform)" Size="@ThemeConstants.SvgIcon.Size.Small" />
-                                        <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Tertiary" 
+                                        <TelerikBadge ThemeColor="@ThemeConstants.Badge.ThemeColor.Tertiary"
                                                       Size="@ThemeConstants.Badge.Size.Small">
                                             @platform
                                         </TelerikBadge>
@@ -145,8 +122,8 @@
     private List<BreadcrumbItem> BreadcrumbData { get; set; } = new()
     {
         new BreadcrumbItem { Text = "Home", Url = "/" },
-        new BreadcrumbItem { Text = "Blog", Url = "/blog" },
-        new BreadcrumbItem { Text = "Entries", Url = "/blog/entries" }
+        new BreadcrumbItem { Text = "Social", Url = "/social" },
+        new BreadcrumbItem { Text = "Entries", Url = "/social/posts" }
     };
 
     private async Task OnGridRead(GridReadEventArgs args)
@@ -154,7 +131,7 @@
         var page = args.Request.Page;
         var sortField = args.Request.Sorts?.FirstOrDefault()?.Member;
         var sortDirection = args.Request.Sorts?.FirstOrDefault()?.SortDirection.ToString().ToLower();
-        
+
         string? filterText = null;
         var filterDescriptor = args.Request.Filters?.FirstOrDefault();
         if (filterDescriptor is FilterDescriptor fd)
@@ -163,7 +140,7 @@
         }
 
         var result = await EntryService.GetEntriesAsync(page, PageSize, sortField, sortDirection, filterText);
-        
+
         args.Data = result.Items;
         args.Total = result.TotalCount;
     }
@@ -176,12 +153,12 @@
 
     private void CreateNewEntry()
     {
-        Navigation.NavigateTo("/blog/editor/new");
+        Navigation.NavigateTo("/social/editor/new");
     }
 
     private void EditEntry(string id)
     {
-        Navigation.NavigateTo($"/blog/editor/{id}");
+        Navigation.NavigateTo($"/social/editor/{id}");
     }
 
     private ISvgIcon GetPlatformIcon(string platform)

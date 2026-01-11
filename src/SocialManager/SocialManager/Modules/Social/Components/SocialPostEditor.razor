@@ -3,7 +3,7 @@
 
 <div class="cardHeader">
     <div class="platformInfo">
-        <TelerikSvgIcon Icon="@PlatformIcon" 
+        <TelerikSvgIcon Icon="@PlatformIcon"
                         Size="@ThemeConstants.SvgIcon.Size.Large"
                         ThemeColor="@(PlatformPost.IsEnabled ? ThemeConstants.SvgIcon.ThemeColor.Primary : ThemeConstants.SvgIcon.ThemeColor.Base)" />
         <span class="platformName">@PlatformPost.Platform</span>
@@ -13,24 +13,23 @@
                    OffLabel="Off" />
 </div>
 
-@if (PlatformPost.IsEnabled)
-{
-    <div class="cardContent">
-        <label class="customTextLabel">Custom Text (Optional)</label>
-        <TelerikTextArea @bind-Value="@PlatformPost.CustomText"
-                         Placeholder="@($"Custom text for {PlatformPost.Platform} (leave empty to use shared text)")"
-                         Rows="3"
-                         Width="100%" />
-        <div class="characterMetadata">
-            <span class="limitLabel">
-                Limit: @PlatformPost.CharacterLimit chars
-            </span>
-            <span class="countDisplay @(TextLength > PlatformPost.CharacterLimit ? "overLimit" : "")">
-                @TextLength / @PlatformPost.CharacterLimit
-            </span>
-        </div>
+<div class="cardContent">
+    <label class="customTextLabel">Custom Text (Optional)</label>
+    <TelerikTextArea Enabled="@PlatformPost.IsEnabled" @bind-Value="@PlatformPost.CustomText"
+                     Placeholder="@(PlatformPost.IsEnabled ? $"Custom text for {PlatformPost.Platform} (leave empty to use shared text)" : String.Empty)"
+                     Rows="3"
+                     Width="100%" />
+    <div class="characterMetadata">
+        <span class="limitLabel">
+            Limit: @PlatformPost.CharacterLimit chars
+        </span>
+        <span class="countDisplay @(TextLength > PlatformPost.CharacterLimit ? "overLimit" : "")">
+            @TextLength / @PlatformPost.CharacterLimit
+        </span>
     </div>
-}
+
+    Attached media: <InputFile />
+</div>
 
 @code {
     [Parameter, EditorRequired]
@@ -46,9 +45,13 @@
 
     private int GetTextLength()
     {
-        var text = string.IsNullOrWhiteSpace(PlatformPost.CustomText) 
-            ? SharedText 
-            : PlatformPost.CustomText;
-        return text.Length;
+        if (PlatformPost.IsEnabled)
+        {
+            var text = string.IsNullOrWhiteSpace(PlatformPost.CustomText)
+                ? SharedText
+                : PlatformPost.CustomText;
+            return text.Length;
+        }
+        return 0;
     }
 }

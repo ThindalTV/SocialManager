@@ -1,11 +1,12 @@
 /* Short Form Editor - minimal styles (card visuals provided by shared Card) */
 
+.shortFormShared {
+}
+
 .shortFormContainer {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg, 24px);
-    min-height: 0;
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: var(--spacing-lg, 24px);
 }
 
 .sharedTextContent {
@@ -19,15 +20,6 @@
     justify-content: flex-end;
     color: var(--color-text-secondary, #757575);
     font-size: var(--font-size-sm, 0.875rem);
-}
-
-.platformCardsContainer {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md, 16px);
-    overflow-y: auto;
-    flex: 1;
-    min-height: 0;
 }
 
 /* Scrollbar Styling */
@@ -45,12 +37,20 @@
     border-radius: var(--radius-sm, 4px);
 }
 
-.platformCardsContainer::-webkit-scrollbar-thumb:hover {
-    background: var(--color-text-secondary, #757575);
-}
+    .platformCardsContainer::-webkit-scrollbar-thumb:hover {
+        background: var(--color-text-secondary, #757575);
+    }
 
 @media (max-width: 767px) {
-    .shortFormContainer { gap: var(--spacing-md, 16px); }
-    .sharedTextContent { gap: var(--spacing-sm, 8px); }
-    .platformCardsContainer { gap: var(--spacing-sm, 8px); }
+    .shortFormContainer {
+        gap: var(--spacing-md, 16px);
+    }
+
+    .sharedTextContent {
+        gap: var(--spacing-sm, 8px);
+    }
+
+    .platformCardsContainer {
+        gap: var(--spacing-sm, 8px);
+    }
 }

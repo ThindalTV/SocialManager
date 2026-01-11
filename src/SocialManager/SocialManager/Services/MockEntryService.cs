@@ -20,8 +20,6 @@ public class MockEntryService : IEntryService
             {
                 Id = (_nextId++).ToString(),
                 Title = "Getting Started with Social Media Management",
-                Synopsis = "A comprehensive guide to help you get started with managing your social media presence effectively.",
-                BlogContent = "<p>Welcome to our comprehensive guide on social media management...</p>",
                 SharedSocialText = "Check out our new guide on social media management! #SocialMedia #Management",
                 IsPublished = true,
                 Tags = ["Social Media", "Management", "Guide"],
@@ -32,8 +30,6 @@ public class MockEntryService : IEntryService
             {
                 Id = (_nextId++).ToString(),
                 Title = "10 Tips for Better Content Creation",
-                Synopsis = "Discover ten essential tips that will transform your content creation process and boost engagement.",
-                BlogContent = "<p>Content creation is an art...</p>",
                 SharedSocialText = "10 essential tips for creating amazing content! 🚀",
                 IsPublished = false,
                 Tags = ["Content Creation", "Tips", "Tutorial"],
@@ -44,8 +40,6 @@ public class MockEntryService : IEntryService
             {
                 Id = (_nextId++).ToString(),
                 Title = "The Future of Social Media Platforms",
-                Synopsis = "An in-depth look at emerging trends and technologies shaping the future of social media.",
-                BlogContent = "<p>As we look ahead to the future...</p>",
                 SharedSocialText = "Exploring the future of social media platforms",
                 IsPublished = true,
                 Tags = ["Social Media", "Future", "Technology"],
@@ -95,7 +89,6 @@ public class MockEntryService : IEntryService
                 CreatedDate = DateTimeOffset.UtcNow.AddDays(-int.Parse(e.Id)), // Mock date
                 UpdatedDate = DateTimeOffset.UtcNow.AddHours(-int.Parse(e.Id)), // Mock date
                 IsPublished = e.IsPublished,
-                HasBlogPost = !string.IsNullOrWhiteSpace(e.BlogContent),
                 SocialPlatforms = e.PlatformPosts.Where(p => p.IsEnabled).Select(p => p.Platform).ToList()
             })
             .ToList();

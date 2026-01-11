@@ -1,3 +1,8 @@
+@using Microsoft.AspNetCore.Components.Routing
+@using Telerik.Blazor
+@using Telerik.Blazor.Components
+@using Telerik.FontIcons
+@using Telerik.SvgIcons
 @inject NavigationManager NavigationManager
 @implements IDisposable
 
@@ -127,13 +132,12 @@
             Title = "Content",
             Items = new List<NavigationItem>
             {
-                new() { Text = "Blog Posts", Icon = SvgIcon.File, Url = "/blog/entries" },
-                new() { Text = "Social Posts (TODO)", Icon = SvgIcon.Image, Url = "/posts" },
+                new() { Text = "Social Posts", Icon = SvgIcon.Image, Url = "/social/posts" },
                 new() { Text = "Media Library (TODO)", Icon = SvgIcon.Photos, Url = "/media" },
                 new() { Text = "Calendar (TODO)", Icon = SvgIcon.Calendar, Url = "/calendar" }
             }
         },
-        new NavigationGroup
+        /*new NavigationGroup
         {
             Title = "Streaming",
             Items = new List<NavigationItem>
@@ -143,7 +147,7 @@
                 new() { Text = "Prompter (TODO)", Icon = SvgIcon.EditTools, Url = "/stream/prompter" },
                 new() { Text = "Chat (TODO)", Icon = SvgIcon.Comment, Url = "/stream/chat" }
             }
-        },
+        }*/
         new NavigationGroup
         {
             Title = "Settings",
@@ -162,6 +166,7 @@
         await UpdatePageTitle();
     }
 
+    // Fix: Change signature to match EventHandler<LocationChangedEventArgs>
     private async void OnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
         await UpdatePageTitle();
